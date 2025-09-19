@@ -1,0 +1,74 @@
+/* ---------------------------
+   Fabric MDL2 (иконки Microsoft)
+---------------------------- */
+@font-face {
+    font-family: "FabricMDL2";
+    src: url("./fonts/Fabric MDL2 Assets.woff2") format("woff2"),
+    url("./fonts/Fabric MDL2 Assets.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ---------------------------
+   Inter (Variable Font)
+   поддерживает wght (100–900), opsz
+---------------------------- */
+@font-face {
+    font-family: "Inter";
+    src: url("./fonts/Inter-VariableFont_opsz,wght.woff2") format("woff2"),
+    url("./fonts/Inter-VariableFont_opsz,wght.woff") format("woff");
+    font-weight: 100 900; /* диапазон вариативности */
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ---------------------------
+   Open Sans (Variable Font)
+   поддерживает wght, wdth
+---------------------------- */
+@font-face {
+    font-family: "Open Sans";
+    src: url("./fonts/OpenSans-VariableFont_wdth,wght.woff2") format("woff2"),
+    url("./fonts/OpenSans-VariableFont_wdth,wght.woff") format("woff");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ---------------------------
+   Roboto (Variable Font)
+   поддерживает wght, wdth
+---------------------------- */
+@font-face {
+    font-family: "Roboto";
+    src: url("./fonts/Roboto-VariableFont_wdth,wght.woff2") format("woff2"),
+    url("./fonts/Roboto-VariableFont_wdth,wght.woff") format("woff");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ---------------------------
+   Segoe UI Regular
+---------------------------- */
+@font-face {
+    font-family: "Segoe UI";
+    src: url("./fonts/Segoe UI.woff2") format("woff2"),
+    url("./fonts/Segoe UI.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ---------------------------
+   Segoe UI Bold
+---------------------------- */
+@font-face {
+    font-family: "Segoe UI";
+    src: url("./fonts/Segoe UI Bold.woff2") format("woff2"),
+    url("./fonts/Segoe UI Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
