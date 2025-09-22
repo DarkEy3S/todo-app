@@ -1,8 +1,16 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MainLayout } from "./components/MainLayout";
+
 function App() {
   return (
-    <>
-      <h1>Hello world!!</h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<div>Hello World! main page</div>} />
+          <Route path="*" element={<div>404!</div>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
