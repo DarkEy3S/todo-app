@@ -3,11 +3,16 @@ import { Link } from "react-router-dom";
 import cls from "./Header.module.css";
 import { SingInIcon, SingUpIcon } from "../icons.tsx";
 
-export const Header = () => {
+interface HeaderProps {
+  burgerFunction?: () => void;
+  burgerActive: boolean;
+}
+
+export const Header = ({ burgerFunction, burgerActive }: HeaderProps) => {
   return (
     <header className={cls.header}>
       <div className={cls.headerTop}>
-        <div className={cls.headerBurger}>
+        <div className={`${cls.headerBurger} ${burgerActive ? cls.active : ""}`} onClick={burgerFunction}>
           <span></span>
           <span></span>
           <span></span>
