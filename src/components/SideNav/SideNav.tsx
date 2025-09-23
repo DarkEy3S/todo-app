@@ -2,10 +2,14 @@ import cls from "./SideNav.module.css";
 import { HomeIcon, SingOutIcon, TodosIcon } from "../icons.tsx";
 import { Link } from "react-router-dom";
 import { Profile } from "../Profile";
+import { forwardRef } from "react";
+interface IProp {
+  className: string;
+}
 
-export const SideNav = ({ className }: { className: string }) => {
+export const SideNav = forwardRef<HTMLDivElement, IProp>(({ className }, ref) => {
   return (
-    <aside className={`${cls.sideNav} ${className}`}>
+    <aside ref={ref} className={`${cls.sideNav} ${className}`}>
       <div className={cls.sideWrapper}>
         <div className={cls.sideNavTop}>
           <Profile />
@@ -32,4 +36,4 @@ export const SideNav = ({ className }: { className: string }) => {
       </div>
     </aside>
   );
-};
+});

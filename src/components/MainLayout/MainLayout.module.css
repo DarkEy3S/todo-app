@@ -15,6 +15,11 @@
     display: flex;
     position: relative;
 
+    @media (max-width: 834px) {
+        min-height: calc(100dvh - 70px - 16px);
+    }
+
+
     aside {
         height: auto;
 
@@ -43,11 +48,12 @@
 }
 .mainRow:has(aside) .mainWrapper::after{
     @media(max-width: 1440px) {
-        transition:  opacity .3s ease-in-out;
+        transition:  opacity .3s ease-in-out, left 0.3s ease-in-out 0.3s;
+
         content: "";
         position: absolute;
         top: 0;
-        left: 0;
+        left: -150%;
 
         z-index: 1;
         background-color: #000;
@@ -59,6 +65,11 @@
 .mainRow:has(aside.active) .mainWrapper::after{
     @media(max-width: 1440px) {
         opacity: .5;
+        left: 0%;
+        transition:  opacity .3s ease-in-out;
+
+
+
     }
 }
 
@@ -67,10 +78,15 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1.25em;
 
     @media (max-width: 1920px) {
         min-height: calc(100dvh - 48px);
+
+    }
+
+
+    @media (max-width:834px ) {
+        min-height: calc(100dvh - 70px - 50px);
 
     }
 
@@ -84,4 +100,5 @@ body:has(aside.active) {
 
 .main {
     margin-bottom: auto;
+    flex: 1 1 auto;
 }
