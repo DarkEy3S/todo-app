@@ -7,3 +7,6 @@ services:
       - "0.0.0.0:${PORT:-5173}:${PORT:-5173}"
     environment:
       - NODE_ENV=${NODE_ENV:-development}
+    volumes:
+      - .:/app
+      - /app/node_modules
