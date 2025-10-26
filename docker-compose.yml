@@ -1,0 +1,9 @@
+services:
+  react-app:
+    build:
+      context: .
+      target: ${BUILD_TARGET:-dev}  # dev по умолчанию
+    ports:
+      - "0.0.0.0:${PORT:-5173}:${PORT:-5173}"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
