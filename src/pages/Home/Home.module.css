@@ -1,6 +1,6 @@
 .home {
     height: 100%;
-    background-color:var(--s1);
+    background-color: var(--secondary);
     display: flex;
     flex-direction: column;
     align-items: center;

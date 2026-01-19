@@ -1,0 +1,11 @@
+.btn {
+    background-color: var(--primary);
+    width: fit-content;
+    padding: 6px 20px;
+    border: none;
+    outline: none;
+    font-family: var(--font-family);
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 2px;
+}

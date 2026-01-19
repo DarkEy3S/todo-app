@@ -1,0 +1,1 @@
+export { SingUp } from "./SingUp";

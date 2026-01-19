@@ -33,10 +33,10 @@ export const Header = ({ burgerFunction, burgerActive, burgerBtnRef }: HeaderPro
           Privacy
         </Link>
         <div className={cls.headerAccounts}>
-          <p>
+          <Link to={"singUp"}>
             <SingUpIcon />
             <span>Sing up</span>
-          </p>
+          </Link>
           <p>
             <SingInIcon />
             <span>Sing in</span>
