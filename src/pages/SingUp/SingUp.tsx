@@ -14,7 +14,7 @@ export const SingUp = () => {
   const [emailValue, setEmailValue] = useState("");
   const [privacyCheckbox, setPrivacyCheckbox] = useState(false);
   const [emailTouched, setEmailTouched] = useState(false);
-  const [passworTouched, setPassworTouched] = useState(false);
+  const [passworddTouched, setPasswordTouched] = useState(false);
   const [passwordVisible, isPasswordVisible] = useState(false);
 
   const isEmailValid = emailValidity === false;
@@ -22,7 +22,7 @@ export const SingUp = () => {
 
   const isSubmitDisabled = isEmailValid || isPasswordValid || privacyCheckbox === false;
   const isEmailError = isEmailValid && emailTouched;
-  const isPasswordError = isPasswordValid && passworTouched;
+  const isPasswordError = isPasswordValid && passworddTouched;
 
   return (
     <section className={cls.singUp}>
@@ -41,7 +41,6 @@ export const SingUp = () => {
                   setEmailValue(cleaned);
                   setEmailValidity(e.target.checkValidity());
                 }}
-                formNoValidate={emailValidity}
                 id={singUpEmailId}
                 placeholder={"Email"}
                 aria-placeholder={"Email"}
@@ -68,11 +67,10 @@ export const SingUp = () => {
                 }}
                 minLength={4}
                 placeholder={"Password"}
-                aria-placeholder={"Password"}
                 type={passwordVisible ? "text" : "password"}
                 id={singUpPasswordId}
                 onBlur={() => {
-                  setPassworTouched(true);
+                  setPasswordTouched(true);
                 }}
               />
               <button

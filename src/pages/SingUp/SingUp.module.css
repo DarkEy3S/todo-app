@@ -73,8 +73,11 @@
             
         }
         input:not([type="checkbox"]) {
-            padding-right: 30px;
             width: 100%;
+        }
+        :has(.singUpFormEye) input{
+            padding-right: 30px;
+
         }
         .singUpFormInputError {
             border-color: var(--error);
