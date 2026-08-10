@@ -92,11 +92,7 @@
 
 
 }
-body:has(aside.active) {
-    @media(max-width: 1440px) {
-        overflow: hidden;
-    }
-}
+
 
 .main {
     margin-bottom: auto;

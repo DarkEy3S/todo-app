@@ -34,7 +34,7 @@
 
 
     /* Default settings */
-    font-family: var(--font-family);
+    font-family: var(--font-family), serif;
     font-weight: 400;
     font-size: 24px;
     line-height: 165%;
