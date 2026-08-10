@@ -14,35 +14,47 @@ export const SingUp = () => {
   const [emailValue, setEmailValue] = useState("");
   const [privacyCheckbox, setPrivacyCheckbox] = useState(false);
   const [emailTouched, setEmailTouched] = useState(false);
-  const [passworddTouched, setPasswordTouched] = useState(false);
+  const [passwordTouched, setPasswordTouched] = useState(false);
   const [passwordVisible, isPasswordVisible] = useState(false);
+  const [textError, setTextError] = useState<string | null>(null);
 
-  const isEmailValid = emailValidity === false;
+  const isEmailValid = !emailValidity;
   const isPasswordValid = passwordValue.trim().length < 4;
 
-  const isSubmitDisabled = isEmailValid || isPasswordValid || privacyCheckbox === false;
+  const isSubmitDisabled = isEmailValid || isPasswordValid || !privacyCheckbox;
   const isEmailError = isEmailValid && emailTouched;
-  const isPasswordError = isPasswordValid && passworddTouched;
+  const isPasswordError = isPasswordValid && passwordTouched;
 
   return (
     <section className={cls.singUp}>
       <div className={cls.singUpContent}>
-        <div className={cls.singUpunsucces}>
-          <div className={cls.stringIconInfo}>
-            <StringIconInfo />
+        {textError && (
+          <div className={cls.singUpunsucces}>
+            <div className={cls.stringIconInfo}>
+              <StringIconInfo />
+            </div>
+            <div className={cls.singUpunsuccesMessage}>
+              <span>{textError}</span>
+            </div>
+            <div className={cls.stringIconClear}>
+              <button type="button" onClick={() => setTextError(null)}>
+                <StringIconClear />
+              </button>
+            </div>
           </div>
-          <div className={cls.singUpunsuccesMessage}>
-            <span>Message about the state of this view</span>
-          </div>
-          <div className={cls.stringIconClear}>
-            <button type="button">
-              <StringIconClear />
-            </button>
-          </div>
-        </div>
+        )}
         <div className={cls.singUpWrapper}>
           <h1 className={cls.singUpTitle}>Sing up</h1>
-          <form className={cls.singUpForm} action="">
+          <form
+            className={cls.singUpForm}
+            action=""
+            onSubmit={(event) => {
+              event.preventDefault();
+              if (emailValue === "test@test.test") {
+                setTextError("User already exists");
+              } else setTextError(null);
+            }}
+          >
             <label htmlFor={singUpEmailId}>
               <span>Email</span>
               <div className={cls.wrapper}>
