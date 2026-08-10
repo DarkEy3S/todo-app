@@ -20,7 +20,9 @@
     --gray7: #fcfcfc;
     --grey20: #f3f2f1;
     --grey90: #a19f9d;
+    --grey190: #201F1E;
     --white: #fff;
+    --error: #A4262C;
 
 
     /*  fonts   */
@@ -274,4 +276,10 @@ h3 {
     }
 
 
+}
+
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
 }

@@ -54,7 +54,6 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
-
         span {
             color: var(--black2);
             font-weight: 600;
@@ -67,6 +66,41 @@
             padding: 8px;
             border-radius: 2px;
             border: 1px solid var(--black2);
+            /* TODO add var transition */
+            transition: border .2s ease;
+            
+
+            
+        }
+        input:not([type="checkbox"]) {
+            padding-right: 30px;
+            width: 100%;
+        }
+        .singUpFormInputError {
+            border-color: var(--error);
+
+        }
+        .singUpFormInputMessage {
+            color: var(--error);
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 85%;
+        }
+        .singUpFormEye {
+            position: absolute;
+            right: 7px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            stroke: none;
+            outline: none;
+            background: unset;
+            cursor: pointer;
+            height: 14px;
+            width: 14px;
+        }
+        .wrapper {
+            position: relative;
         }
     }
 
