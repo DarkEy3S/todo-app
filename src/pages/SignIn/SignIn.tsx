@@ -1,18 +1,16 @@
-import cls from "./SignUp.module.css";
+import cls from "./SignIn.module.css";
 import { Link } from "react-router-dom";
 import { useId } from "react";
 import btn from "../../assets/buttons.module.css";
 import { useState } from "react";
 import { PasswordIconEyeClose, PasswordIconEyeOpen, StringIconInfo, StringIconClear } from "../../components/icons";
 
-export const SignUp = () => {
-  const signUpEmailId: string = useId();
-  const signUpPasswordId: string = useId();
-  const signUpPrivacyId: string = useId();
+export const SignIn = () => {
+  const signInEmailId: string = useId();
+  const signInPasswordId: string = useId();
   const [emailValidity, setEmailValidity] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
-  const [privacyCheckbox, setPrivacyCheckbox] = useState(false);
   const [emailTouched, setEmailTouched] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
   const [passwordVisible, isPasswordVisible] = useState(false);
@@ -21,19 +19,19 @@ export const SignUp = () => {
   const isEmailValid = !emailValidity;
   const isPasswordValid = passwordValue.trim().length < 4;
 
-  const isSubmitDisabled = isEmailValid || isPasswordValid || !privacyCheckbox;
+  const isSubmitDisabled = isEmailValid || isPasswordValid;
   const isEmailError = isEmailValid && emailTouched;
   const isPasswordError = isPasswordValid && passwordTouched;
 
   return (
-    <section className={cls.signUp}>
-      <div className={cls.signUpContent}>
+    <section className={cls.signIn}>
+      <div className={cls.signInContent}>
         {textError && (
-          <div className={cls.signUpunsucces}>
+          <div className={cls.signInunsucces}>
             <div className={cls.stringIconInfo}>
               <StringIconInfo />
             </div>
-            <div className={cls.signUpunsuccesMessage}>
+            <div className={cls.signInunsuccesMessage}>
               <span>{textError}</span>
             </div>
             <div className={cls.stringIconClear}>
@@ -43,10 +41,10 @@ export const SignUp = () => {
             </div>
           </div>
         )}
-        <div className={cls.signUpWrapper}>
-          <h1 className={cls.signUpTitle}>Sign up</h1>
+        <div className={cls.signInWrapper}>
+          <h1 className={cls.signInTitle}>Sign in</h1>
           <form
-            className={cls.signUpForm}
+            className={cls.signInForm}
             action=""
             onSubmit={(event) => {
               event.preventDefault();
@@ -55,11 +53,11 @@ export const SignUp = () => {
               } else setTextError(null);
             }}
           >
-            <label htmlFor={signUpEmailId}>
+            <label htmlFor={signInEmailId}>
               <span>Email</span>
               <div className={cls.wrapper}>
                 <input
-                  className={`${isEmailError && cls.signUpFormInputError}`}
+                  className={`${isEmailError && cls.signInFormInputError}`}
                   value={emailValue}
                   onChange={(e) => {
                     const cleaned = e.target.value.replaceAll(" ", "");
@@ -67,7 +65,7 @@ export const SignUp = () => {
                     setEmailValue(cleaned);
                     setEmailValidity(e.target.checkValidity());
                   }}
-                  id={signUpEmailId}
+                  id={signInEmailId}
                   placeholder={"Email"}
                   aria-placeholder={"Email"}
                   type="email"
@@ -78,13 +76,13 @@ export const SignUp = () => {
                 />
               </div>
 
-              {isEmailError && <span className={cls.signUpFormInputMessage}>Invalid email format.</span>}
+              {isEmailError && <span className={cls.signInFormInputMessage}>Invalid email format.</span>}
             </label>
-            <label htmlFor={signUpPasswordId}>
+            <label htmlFor={signInPasswordId}>
               <span>Password</span>
               <div className={cls.wrapper}>
                 <input
-                  className={`${isPasswordError && cls.signUpFormInputError}`}
+                  className={`${isPasswordError && cls.signInFormInputError}`}
                   value={passwordValue}
                   onChange={(e) => {
                     const cleaned = e.target.value.replaceAll(" ", "");
@@ -94,13 +92,13 @@ export const SignUp = () => {
                   minLength={4}
                   placeholder={"Password"}
                   type={passwordVisible ? "text" : "password"}
-                  id={signUpPasswordId}
+                  id={signInPasswordId}
                   onBlur={() => {
                     setPasswordTouched(true);
                   }}
                 />
                 <button
-                  className={cls.signUpFormEye}
+                  className={cls.signInFormEye}
                   type="button"
                   onClick={() => {
                     isPasswordVisible((v) => !v);
@@ -110,28 +108,18 @@ export const SignUp = () => {
                 </button>
               </div>
 
-              {isPasswordError && <span className={cls.signUpFormInputMessage}>4 characters minimum.</span>}
-            </label>
-            <label className={cls.signUpPrivacy} htmlFor={signUpPrivacyId}>
-              <input
-                checked={privacyCheckbox}
-                onChange={(e) => {
-                  setPrivacyCheckbox(e.target.checked);
-                }}
-                type="checkbox"
-                id={signUpPrivacyId}
-              />
-              <span>
-                I agree to the MaToDo <Link to={"#"}>Privacy Policy</Link>
-              </span>
+              {isPasswordError && <span className={cls.signInFormInputMessage}>4 characters minimum.</span>}
             </label>
 
-            <button disabled={isSubmitDisabled} className={`${btn.btn} ${cls.signUpButton}`} type="submit">
-              Sign up
+            <button disabled={isSubmitDisabled} className={`${btn.btn} ${cls.signInButton}`} type="submit">
+              Sign in
             </button>
           </form>
-          <div className={cls.signUpBlockSignIn}>
-            <span>Already on MaToDo?</span> <Link to={"/signin"}>Sign in</Link>
+          <div className={cls.signInPageForgot}>
+            <Link to={"#"}>Forgot password?</Link>
+          </div>
+          <div className={cls.signInBlockSignIn}>
+            <span>Already on MaToDo?</span> <Link to={"/signup"}>Sign up</Link>
           </div>
         </div>
       </div>

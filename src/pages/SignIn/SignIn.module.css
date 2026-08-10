@@ -1,0 +1,258 @@
+.signIn {
+    height: 100%;
+    background-color: var(--secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 248px;
+
+}
+
+.signInContent {
+    background-color: var(--white);
+    max-width: 608px;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+        
+    @media (max-width: 1920px) {
+        max-width: 524px;
+
+    }
+
+
+    @media (max-width: 1440px) {
+        max-width: 572px;
+
+    }
+
+    @media (max-width: 834px) {
+        max-width: 95%;
+
+    }
+}
+
+
+
+.signInunsucces {
+
+    display: flex;
+    justify-content:space-between;
+    width: 100%;
+    background-color: #F7E1E3;
+    padding: 12px 8px;
+    height: 32px;
+    align-items: center;
+    .stringIconInfo, .stringIconClear{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .signInunsuccesMessage {
+        color: var(--black2);
+        text-align: left;
+        flex: 1 1 auto;
+        padding: 0 8px;
+        font-size: 12px;
+    }
+    .stringIconClear button{
+        cursor: pointer;
+        background-color: unset;
+        border: none;
+        stroke: none;
+    }
+}
+
+
+.signInWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    padding: 48px 134px;
+    
+    @media (max-width: 1920px) {
+        padding: 48px 112px;
+
+    }
+
+
+    @media (max-width: 1440px) {
+        padding: 48px 138px;
+
+    }
+
+    @media (max-width: 834px) {
+        padding: 32px 14px;
+
+    }
+
+}
+
+.signInTitle {
+    color: var(--secondary);
+    font-size: 28px;
+}
+
+.signInForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+
+    
+
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        span {
+            color: var(--black2);
+            font-weight: 600;
+        }
+
+        input {
+            background-color: var(--gray7);
+            stroke: var(--gray2);
+            color: var(--black2);
+            padding: 8px;
+            border-radius: 2px;
+            border: 1px solid var(--black2);
+            /* TODO add var transition */
+            transition: border .2s ease;
+            
+
+            
+        }
+        input:not([type="checkbox"]) {
+            width: 100%;
+        }
+        :has(.signInFormEye) input{
+            padding-right: 30px;
+
+        }
+        .signInFormInputError {
+            border-color: var(--error);
+
+        }
+        .signInFormInputMessage {
+            color: var(--error);
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 85%;
+        }
+        .signInFormEye {
+            position: absolute;
+            right: 7px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            stroke: none;
+            outline: none;
+            background: unset;
+            cursor: pointer;
+            height: 14px;
+            width: 14px;
+        }
+        .wrapper {
+            position: relative;
+        }
+    }
+
+    .signInPrivacy {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        span {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 148%;
+
+            a {
+                color: var(--primary);
+            }
+            a:hover {
+                color: var(--s1);
+            }
+        }
+        input[type="checkbox"] {
+            -webkit-appearance: none;
+            appearance: none;
+
+        }
+        input[type="checkbox"]:checked {
+        }
+        input[type="checkbox"]:disabled {
+        }
+        input {
+            appearance: none;
+            width: 1rem;
+            height: 1rem;
+            border: 1px solid var(--black2);
+            border-radius: 0.2em;
+            background-color: #fff;
+            cursor: pointer;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            margin: 0;
+        }
+        /* Оформление состояния checked */
+        input:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+        }
+        /* Эффект нажатия */
+        input:active {
+            filter: brightness(90%);
+        }
+
+        /* Смена цвета границы при наведении */
+        input:hover:not(:disabled) {
+            border-color: var(--primary);
+        }
+
+        /* Стили для чекбокса при фокусе */
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+        /* Отключенный чекбокс */
+        input:disabled {
+            filter: none;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        input:disabled ~ .signInPrivacy {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    .signInButton {
+        align-self: center;
+    }
+
+
+}
+
+
+
+.signInBlockSignIn {
+    font-size: 14px;
+    span {
+        color: var(--black1);
+
+    }
+  
+    a:hover {
+        color: var(--s1);
+    }
+
+}
