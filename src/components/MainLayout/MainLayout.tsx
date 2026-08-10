@@ -4,11 +4,13 @@ import { Outlet } from "react-router-dom";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
 import { SideNav } from "../SideNav";
+import { useScrollLock } from "../../hooks/useScrollLock";
 
 export const MainLayout = () => {
   const [burgerActive, setBurgerActive] = useState(false);
   const sideNavRef = useRef<HTMLDivElement | null>(null);
   const burgerBtnRef = useRef<HTMLDivElement | null>(null);
+  useScrollLock(burgerActive);
 
   useEffect(() => {
     if (!burgerActive) return; // если меню закрыто, слушатель не нужен
