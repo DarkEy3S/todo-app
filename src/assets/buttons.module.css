@@ -1,0 +1,18 @@
+.btn {
+    background-color: var(--primary);
+    width: fit-content;
+    padding: 6px 20px;
+    border: none;
+    outline: none;
+    font-family: var(--font-family);
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 2px;
+    transition: background-color .2s ease-in-out;
+
+    &:disabled {
+        background-color: var(--grey20);
+        color: var(--grey90);
+        cursor:not-allowed;
+    }
+}

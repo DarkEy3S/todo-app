@@ -1,0 +1,13 @@
+services:
+  react-app:
+    build:
+      context: .
+      target: ${BUILD_TARGET:-dev}  # dev по умолчанию
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - PORT=${PORT}
+    volumes:
+      - .:/app
+      - /app/node_modules

@@ -1,26 +1,48 @@
 :root {
 
 
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
+    /*  color   */
+    --secondary: #0d2960;
+    --s1: #183977;
+    --s2: #204383;
+    --s3: #7186b4;
+    --s4: #c1cadf;
+    --primary: #0078d4;
+    --black1: #000;
+    --black2: #201f1e;
+    --black3: #323130;
+    --gray1: #605e5c;
+    --gray2: #8a8886;
+    --gray3: #a19f9d;
+    --gray4: #ddd;
+    --gray5: #edebe9;
+    --gray6: #f2f2f2;
+    --gray7: #fcfcfc;
+    --grey20: #f3f2f1;
+    --grey90: #a19f9d;
+    --grey190: #201F1E;
+    --white: #fff;
+    --error: #A4262C;
+
+
+    /*  fonts   */
+    --font-family: "Segoe UI", system-ui, sans-serif;
+    --second-family: "Open Sans", system-ui, sans-serif;
+    --third-family: "Fabric MDL2 Assets", system-ui, sans-serif;
+    --font3: "Roboto", system-ui, sans-serif;
+    --font4: "Inter", system-ui, sans-serif;
+
+
+    /* Default settings */
+    font-family: var(--font-family);
     font-weight: 400;
-    font-size: 16px;
-
+    font-size: 24px;
+    line-height: 165%;
     color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
-
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    color: var(--primary);
+    background-color: var(--white);
 }
 
-@media (max-width: 768px) {
-    :root {
-        font-size: 12px;
-    }
-}
 
 * {
     margin: 0;
@@ -32,13 +54,53 @@
 
 a {
     color: inherit;
+    text-decoration: inherit;
 }
 
 body {
 
 }
 
+/*  Titles  */
+h1 {
+    font-size: 42px;
+    line-height: 148%;
+}
 
+h2 {
+    font-size: 34px;
+    line-height: 165%;
+}
+
+h3 {
+    font-size: 28px;
+    line-height: 158%;
+}
+
+.subtitleBig {
+    font-size: 24px;
+    line-height: 150%;
+}
+
+.subtitleMiddle {
+    font-size: 22px;
+    line-height: 162%;
+}
+
+.subtitleSmall {
+    font-size: 14px;
+    line-height: 145%;
+}
+
+.captionBig {
+    font-size: 14px;
+    line-height: 145%;
+}
+
+.captionSmall {
+    font-size: 12px;
+    line-height: 165%;
+}
 
 
 @media (prefers-color-scheme: light) {
@@ -53,4 +115,171 @@ body {
     :root {
 
     }
+}
+
+/*  Large Screen  */
+
+@media (max-width: 1920px) {
+    :root {
+        /* Default settings */
+        font-size: 20px;
+        line-height: 160%;
+    }
+
+
+    /*  Titles  */
+    h1 {
+        font-size: 34px;
+        line-height: 165%;
+    }
+
+    h2 {
+        font-size: 30px;
+        line-height: 160%;
+    }
+
+    h3 {
+        font-size: 24px;
+        line-height: 150%;
+    }
+
+    .subtitleBig {
+        font-size: 20px;
+        line-height: 160%;
+    }
+
+    .subtitleMedium {
+        font-size: 20px;
+        line-height: 160%;
+    }
+
+    .subtitleSmall {
+        font-size: 12px;
+        line-height: 165%;
+    }
+
+    .captionBig {
+        font-size: 13px;
+        line-height: 150%;
+    }
+
+    .captionSmall {
+        font-size: 10px;
+        line-height: 160%;
+    }
+
+}
+
+/*  Medium Screen  */
+
+@media (max-width: 1440px) {
+    :root {
+        /* Default settings */
+        font-size: 18px;
+        line-height: 155%;
+    }
+
+
+    /*  Titles  */
+    h1 {
+        font-size: 26px;
+        line-height: 170%;
+    }
+
+    h2 {
+        font-size: 24px;
+        line-height: 165%;
+    }
+
+    h3 {
+        font-size: 22px;
+        line-height: 165%;
+    }
+
+    .subtitleBig {
+        font-size: 18px;
+        line-height: 158%;
+    }
+
+    .subtitleMedium {
+        font-size: 18px;
+        line-height: 158%;
+    }
+
+    .subtitleSmall {
+        font-size: 12px;
+        line-height: 165%;
+    }
+
+    .captionBig {
+        font-size: 12px;
+        line-height: 165%;
+    }
+
+    .captionSmall {
+        font-size: 10px;
+        line-height: 200%;
+    }
+
+
+}
+
+/*  Small Screen  */
+
+@media (max-width: 834px) {
+    :root {
+        /* Default settings */
+        font-size: 14px;
+        line-height: 170%;
+    }
+
+
+    /*  Titles  */
+    h1 {
+        font-size: 24px;
+        line-height: 165%;
+    }
+
+    h2 {
+        font-size: 20px;
+        line-height: 160%;
+    }
+
+    h3 {
+        font-size: 20px;
+        line-height: 160%;
+    }
+
+    .subtitleBig {
+        font-size: 16px;
+        line-height: 150%;
+    }
+
+    .subtitleMedium {
+        font-size: 16px;
+        line-height: 150%;
+    }
+
+    .subtitleSmall {
+        font-size: 16px;
+        line-height: 150%;
+    }
+
+    .captionBig {
+        font-size: 12px;
+        line-height: 165%;
+    }
+
+    .captionSmall {
+        font-size: 10px;
+        line-height: 200%;
+    }
+
+
+}
+
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
 }

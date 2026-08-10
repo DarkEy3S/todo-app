@@ -1,0 +1,104 @@
+.mainLayout {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+
+    header {
+        z-index: 100;
+    }
+}
+.mainRow {
+    height: 100%;
+    min-height: calc(100dvh - 70px);
+    display: flex;
+    position: relative;
+
+    @media (max-width: 834px) {
+        min-height: calc(100dvh - 70px - 16px);
+    }
+
+
+    aside {
+        height: auto;
+
+        z-index: 5;
+        flex: 0 0 240px;
+        overflow: auto;
+        @media(max-width: 1920px) {
+
+            flex: 0 0 206px;
+        }
+        @media(max-width: 1440px) {
+            height: 100%;
+
+            width: 306px;
+            left: -150%;
+            transition: left 0.4s ease-in-out;
+            position: fixed;
+            top: auto;
+        }
+    }
+    aside.active {
+        @media(max-width: 1440px) {
+            left: 0;
+        }
+    }
+}
+.mainRow:has(aside) .mainWrapper::after{
+    @media(max-width: 1440px) {
+        transition:  opacity .3s ease-in-out, left 0.3s ease-in-out 0.3s;
+
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -150%;
+
+        z-index: 1;
+        background-color: #000;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+}
+.mainRow:has(aside.active) .mainWrapper::after{
+    @media(max-width: 1440px) {
+        opacity: .5;
+        left: 0%;
+        transition:  opacity .3s ease-in-out;
+
+
+
+    }
+}
+
+.mainWrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media (max-width: 1920px) {
+        min-height: calc(100dvh - 48px);
+
+    }
+
+
+    @media (max-width:834px ) {
+        min-height: calc(100dvh - 70px - 50px);
+
+    }
+
+
+}
+body:has(aside.active) {
+    @media(max-width: 1440px) {
+        overflow: hidden;
+    }
+}
+
+.main {
+    margin-bottom: auto;
+    flex: 1 1 auto;
+}
