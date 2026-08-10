@@ -1,5 +1,5 @@
 import cls from "./SideNav.module.css";
-import { HomeIcon, SingOutIcon, TodosIcon } from "../icons.tsx";
+import { HomeIcon, SignOutIcon, TodosIcon } from "../icons.tsx";
 import { Link } from "react-router-dom";
 import { Profile } from "../Profile";
 import { forwardRef } from "react";
@@ -28,7 +28,7 @@ export const SideNav = forwardRef<HTMLDivElement, IProp>(({ className }, ref) =>
             </li>
             <li>
               <Link to={"/"}>
-                <SingOutIcon /> Sing out
+                <SignOutIcon /> Sign out
               </Link>
             </li>
           </ul>

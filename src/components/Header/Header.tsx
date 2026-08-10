@@ -1,7 +1,7 @@
 import logoSvg from "/public/logo.svg";
 import { Link } from "react-router-dom";
 import cls from "./Header.module.css";
-import { SingInIcon, SingUpIcon } from "../icons.tsx";
+import { SignInIcon, SignUpIcon } from "../icons.tsx";
 import type { RefObject } from "react";
 
 interface HeaderProps {
@@ -33,13 +33,13 @@ export const Header = ({ burgerFunction, burgerActive, burgerBtnRef }: HeaderPro
           Privacy
         </Link>
         <div className={cls.headerAccounts}>
-          <Link to={"singUp"}>
-            <SingUpIcon />
-            <span>Sing up</span>
+          <Link to={"/signup"}>
+            <SignUpIcon />
+            <span>Sign up</span>
           </Link>
           <p>
-            <SingInIcon />
-            <span>Sing in</span>
+            <SignInIcon />
+            <span>Sign in</span>
           </p>
         </div>
       </div>

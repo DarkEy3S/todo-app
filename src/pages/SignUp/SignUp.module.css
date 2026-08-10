@@ -1,4 +1,4 @@
-.singUp {
+.signUp {
     height: 100%;
     background-color: var(--secondary);
     display: flex;
@@ -9,7 +9,7 @@
 
 }
 
-.singUpContent {
+.signUpContent {
     background-color: var(--white);
     max-width: 608px;
     width: 100%;
@@ -35,7 +35,7 @@
 
 
 
-.singUpunsucces {
+.signUpunsucces {
 
     display: flex;
     justify-content:space-between;
@@ -49,7 +49,7 @@
         justify-content: center;
         align-items: center;
     }
-    .singUpunsuccesMessage {
+    .signUpunsuccesMessage {
         color: var(--black2);
         text-align: left;
         flex: 1 1 auto;
@@ -65,7 +65,7 @@
 }
 
 
-.singUpWrapper {
+.signUpWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -92,12 +92,12 @@
 
 }
 
-.singUpTitle {
+.signUpTitle {
     color: var(--secondary);
     font-size: 28px;
 }
 
-.singUpForm {
+.signUpForm {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -131,21 +131,21 @@
         input:not([type="checkbox"]) {
             width: 100%;
         }
-        :has(.singUpFormEye) input{
+        :has(.signUpFormEye) input{
             padding-right: 30px;
 
         }
-        .singUpFormInputError {
+        .signUpFormInputError {
             border-color: var(--error);
 
         }
-        .singUpFormInputMessage {
+        .signUpFormInputMessage {
             color: var(--error);
             font-size: 12px;
             font-weight: 400;
             line-height: 85%;
         }
-        .singUpFormEye {
+        .signUpFormEye {
             position: absolute;
             right: 7px;
             top: 50%;
@@ -163,7 +163,7 @@
         }
     }
 
-    .singUpPrivacy {
+    .signUpPrivacy {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -229,13 +229,13 @@
             cursor: not-allowed;
         }
 
-        input:disabled ~ .singUpPrivacy {
+        input:disabled ~ .signUpPrivacy {
             opacity: 0.5;
             cursor: not-allowed;
         }
     }
 
-    .singUpButton {
+    .signUpButton {
         align-self: center;
     }
 
@@ -244,7 +244,7 @@
 
 
 
-.singUpBlockSignIn {
+.signUpBlockSignIn {
     font-size: 14px;
     span {
         color: var(--black1);

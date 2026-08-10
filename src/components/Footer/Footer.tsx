@@ -10,7 +10,7 @@ export const Footer = () => {
       <div className={cls.footerBottom}>
         <ContactInfoMail mail={"sevak.martirosyan1@gmail.com"} className={cls.mail} />
         <p>
-          Made with <span>❤️</span> using MaToDo platform!
+          Made with <span>❤️</span> uSign MaToDo platform!
         </p>
       </div>
     </footer>

@@ -34,7 +34,7 @@ export default defineConfig([
       "prettier/prettier": [
         "error",
         {
-          singleQuote: false,
+          SignleQuote: false,
           printWidth: 130,
           tabWidth: 2,
           semi: true,

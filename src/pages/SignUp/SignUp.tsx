@@ -1,14 +1,14 @@
-import cls from "./SingUp.module.css";
+import cls from "./SignUp.module.css";
 import { Link } from "react-router-dom";
 import { useId } from "react";
 import btn from "../../assets/buttons.module.css";
 import { useState } from "react";
 import { PasswordIconEyeClose, PasswordIconEyeOpen, StringIconInfo, StringIconClear } from "../../components/icons";
 
-export const SingUp = () => {
-  const singUpEmailId: string = useId();
-  const singUpPasswordId: string = useId();
-  const singUpPrivacyId: string = useId();
+export const SignUp = () => {
+  const signUpEmailId: string = useId();
+  const signUpPasswordId: string = useId();
+  const signUpPrivacyId: string = useId();
   const [emailValidity, setEmailValidity] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
@@ -26,14 +26,14 @@ export const SingUp = () => {
   const isPasswordError = isPasswordValid && passwordTouched;
 
   return (
-    <section className={cls.singUp}>
-      <div className={cls.singUpContent}>
+    <section className={cls.signUp}>
+      <div className={cls.signUpContent}>
         {textError && (
-          <div className={cls.singUpunsucces}>
+          <div className={cls.signUpunsucces}>
             <div className={cls.stringIconInfo}>
               <StringIconInfo />
             </div>
-            <div className={cls.singUpunsuccesMessage}>
+            <div className={cls.signUpunsuccesMessage}>
               <span>{textError}</span>
             </div>
             <div className={cls.stringIconClear}>
@@ -43,10 +43,10 @@ export const SingUp = () => {
             </div>
           </div>
         )}
-        <div className={cls.singUpWrapper}>
-          <h1 className={cls.singUpTitle}>Sing up</h1>
+        <div className={cls.signUpWrapper}>
+          <h1 className={cls.signUpTitle}>Sign up</h1>
           <form
-            className={cls.singUpForm}
+            className={cls.signUpForm}
             action=""
             onSubmit={(event) => {
               event.preventDefault();
@@ -55,11 +55,11 @@ export const SingUp = () => {
               } else setTextError(null);
             }}
           >
-            <label htmlFor={singUpEmailId}>
+            <label htmlFor={signUpEmailId}>
               <span>Email</span>
               <div className={cls.wrapper}>
                 <input
-                  className={`${isEmailError && cls.singUpFormInputError}`}
+                  className={`${isEmailError && cls.signUpFormInputError}`}
                   value={emailValue}
                   onChange={(e) => {
                     const cleaned = e.target.value.replaceAll(" ", "");
@@ -67,7 +67,7 @@ export const SingUp = () => {
                     setEmailValue(cleaned);
                     setEmailValidity(e.target.checkValidity());
                   }}
-                  id={singUpEmailId}
+                  id={signUpEmailId}
                   placeholder={"Email"}
                   aria-placeholder={"Email"}
                   type="email"
@@ -78,13 +78,13 @@ export const SingUp = () => {
                 />
               </div>
 
-              {isEmailError && <span className={cls.singUpFormInputMessage}>Invalid email format.</span>}
+              {isEmailError && <span className={cls.signUpFormInputMessage}>Invalid email format.</span>}
             </label>
-            <label htmlFor={singUpPasswordId}>
+            <label htmlFor={signUpPasswordId}>
               <span>Password</span>
               <div className={cls.wrapper}>
                 <input
-                  className={`${isPasswordError && cls.singUpFormInputError}`}
+                  className={`${isPasswordError && cls.signUpFormInputError}`}
                   value={passwordValue}
                   onChange={(e) => {
                     const cleaned = e.target.value.replaceAll(" ", "");
@@ -94,13 +94,13 @@ export const SingUp = () => {
                   minLength={4}
                   placeholder={"Password"}
                   type={passwordVisible ? "text" : "password"}
-                  id={singUpPasswordId}
+                  id={signUpPasswordId}
                   onBlur={() => {
                     setPasswordTouched(true);
                   }}
                 />
                 <button
-                  className={cls.singUpFormEye}
+                  className={cls.signUpFormEye}
                   type="button"
                   onClick={() => {
                     isPasswordVisible((v) => !v);
@@ -110,28 +110,28 @@ export const SingUp = () => {
                 </button>
               </div>
 
-              {isPasswordError && <span className={cls.singUpFormInputMessage}>4 characters minimum.</span>}
+              {isPasswordError && <span className={cls.signUpFormInputMessage}>4 characters minimum.</span>}
             </label>
-            <label className={cls.singUpPrivacy} htmlFor={singUpPrivacyId}>
+            <label className={cls.signUpPrivacy} htmlFor={signUpPrivacyId}>
               <input
                 checked={privacyCheckbox}
                 onChange={(e) => {
                   setPrivacyCheckbox(e.target.checked);
                 }}
                 type="checkbox"
-                id={singUpPrivacyId}
+                id={signUpPrivacyId}
               />
               <span>
                 I agree to the MaToDo <Link to={"#"}>Privacy Policy</Link>
               </span>
             </label>
 
-            <button disabled={isSubmitDisabled} className={`${btn.btn} ${cls.singUpButton}`} type="submit">
-              Sing up
+            <button disabled={isSubmitDisabled} className={`${btn.btn} ${cls.signUpButton}`} type="submit">
+              Sign up
             </button>
           </form>
-          <div className={cls.singUpBlockSignIn}>
-            <span>Already on MaToDo?</span> <Link to={"#"}>Sing in</Link>
+          <div className={cls.signUpBlockSignIn}>
+            <span>Already on MaToDo?</span> <Link to={"#"}>Sign in</Link>
           </div>
         </div>
       </div>

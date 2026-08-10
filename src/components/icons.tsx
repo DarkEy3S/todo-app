@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-export const SingUpIcon = (props: SVGProps<SVGSVGElement>) => {
+export const SignUpIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -13,7 +13,7 @@ export const SingUpIcon = (props: SVGProps<SVGSVGElement>) => {
   );
 };
 
-export const SingInIcon = (props: SVGProps<SVGSVGElement>) => {
+export const SignInIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -133,7 +133,7 @@ export const TodosIcon = (props: SVGProps<SVGSVGElement>) => {
   );
 };
 
-export const SingOutIcon = (props: SVGProps<SVGSVGElement>) => {
+export const SignOutIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
