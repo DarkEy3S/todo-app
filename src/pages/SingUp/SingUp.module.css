@@ -6,7 +6,64 @@
     align-items: center;
     justify-content: center;
     min-height: 248px;
+
 }
+
+.singUpContent {
+    background-color: var(--white);
+    max-width: 608px;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+        
+    @media (max-width: 1920px) {
+        max-width: 524px;
+
+    }
+
+
+    @media (max-width: 1440px) {
+        max-width: 572px;
+
+    }
+
+    @media (max-width: 834px) {
+        max-width: 95%;
+
+    }
+}
+
+
+
+.singUpunsucces {
+
+    display: flex;
+    justify-content:space-between;
+    width: 100%;
+    background-color: #F7E1E3;
+    padding: 12px 8px;
+    height: 32px;
+    align-items: center;
+    .stringIconInfo, .stringIconClear{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .singUpunsuccesMessage {
+        color: var(--black2);
+        text-align: left;
+        flex: 1 1 auto;
+        padding: 0 8px;
+        font-size: 12px;
+    }
+    .stringIconClear button{
+        cursor: pointer;
+        background-color: unset;
+        border: none;
+        stroke: none;
+    }
+}
+
 
 .singUpWrapper {
     display: flex;
@@ -14,26 +71,21 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-    background-color: var(--white);
-    max-width: 608px;
-    width: 100%;
+
     padding: 48px 134px;
     
     @media (max-width: 1920px) {
-        max-width: 524px;
         padding: 48px 112px;
 
     }
 
 
     @media (max-width: 1440px) {
-        max-width: 572px;
         padding: 48px 138px;
 
     }
 
     @media (max-width: 834px) {
-        max-width: 95%;
         padding: 32px 14px;
 
     }
@@ -50,6 +102,10 @@
     flex-direction: column;
     gap: 16px;
     width: 100%;
+
+    
+
+
     label {
         display: flex;
         flex-direction: column;
@@ -185,6 +241,8 @@
 
 
 }
+
+
 
 .singUpBlockSignIn {
     font-size: 14px;

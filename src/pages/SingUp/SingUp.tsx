@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useId } from "react";
 import btn from "../../assets/buttons.module.css";
 import { useState } from "react";
-import { PasswordIconEyeClose, PasswordIconEyeOpen } from "../../components/icons";
+import { PasswordIconEyeClose, PasswordIconEyeOpen, StringIconInfo, StringIconClear } from "../../components/icons";
 
 export const SingUp = () => {
   const singUpEmailId: string = useId();
@@ -26,86 +26,101 @@ export const SingUp = () => {
 
   return (
     <section className={cls.singUp}>
-      <div className={cls.singUpWrapper}>
-        <h1 className={cls.singUpTitle}>Sing up</h1>
-        <form className={cls.singUpForm} action="">
-          <label htmlFor={singUpEmailId}>
-            <span>Email</span>
-            <div className={cls.wrapper}>
+      <div className={cls.singUpContent}>
+        <div className={cls.singUpunsucces}>
+          <div className={cls.stringIconInfo}>
+            <StringIconInfo />
+          </div>
+          <div className={cls.singUpunsuccesMessage}>
+            <span>Message about the state of this view</span>
+          </div>
+          <div className={cls.stringIconClear}>
+            <button type="button">
+              <StringIconClear />
+            </button>
+          </div>
+        </div>
+        <div className={cls.singUpWrapper}>
+          <h1 className={cls.singUpTitle}>Sing up</h1>
+          <form className={cls.singUpForm} action="">
+            <label htmlFor={singUpEmailId}>
+              <span>Email</span>
+              <div className={cls.wrapper}>
+                <input
+                  className={`${isEmailError && cls.singUpFormInputError}`}
+                  value={emailValue}
+                  onChange={(e) => {
+                    const cleaned = e.target.value.replaceAll(" ", "");
+                    e.target.value = cleaned;
+                    setEmailValue(cleaned);
+                    setEmailValidity(e.target.checkValidity());
+                  }}
+                  id={singUpEmailId}
+                  placeholder={"Email"}
+                  aria-placeholder={"Email"}
+                  type="email"
+                  onBlur={() => {
+                    setEmailTouched(true);
+                  }}
+                  required
+                />
+              </div>
+
+              {isEmailError && <span className={cls.singUpFormInputMessage}>Invalid email format.</span>}
+            </label>
+            <label htmlFor={singUpPasswordId}>
+              <span>Password</span>
+              <div className={cls.wrapper}>
+                <input
+                  className={`${isPasswordError && cls.singUpFormInputError}`}
+                  value={passwordValue}
+                  onChange={(e) => {
+                    const cleaned = e.target.value.replaceAll(" ", "");
+                    e.target.value = cleaned;
+                    setPasswordValue(cleaned);
+                  }}
+                  minLength={4}
+                  placeholder={"Password"}
+                  type={passwordVisible ? "text" : "password"}
+                  id={singUpPasswordId}
+                  onBlur={() => {
+                    setPasswordTouched(true);
+                  }}
+                />
+                <button
+                  className={cls.singUpFormEye}
+                  type="button"
+                  onClick={() => {
+                    isPasswordVisible((v) => !v);
+                  }}
+                >
+                  {passwordVisible ? <PasswordIconEyeClose /> : <PasswordIconEyeOpen />}
+                </button>
+              </div>
+
+              {isPasswordError && <span className={cls.singUpFormInputMessage}>4 characters minimum.</span>}
+            </label>
+            <label className={cls.singUpPrivacy} htmlFor={singUpPrivacyId}>
               <input
-                className={`${isEmailError && cls.singUpFormInputError}`}
-                value={emailValue}
+                checked={privacyCheckbox}
                 onChange={(e) => {
-                  const cleaned = e.target.value.replaceAll(" ", "");
-                  e.target.value = cleaned;
-                  setEmailValue(cleaned);
-                  setEmailValidity(e.target.checkValidity());
+                  setPrivacyCheckbox(e.target.checked);
                 }}
-                id={singUpEmailId}
-                placeholder={"Email"}
-                aria-placeholder={"Email"}
-                type="email"
-                onBlur={() => {
-                  setEmailTouched(true);
-                }}
-                required
+                type="checkbox"
+                id={singUpPrivacyId}
               />
-            </div>
+              <span>
+                I agree to the MaToDo <Link to={"#"}>Privacy Policy</Link>
+              </span>
+            </label>
 
-            {isEmailError && <span className={cls.singUpFormInputMessage}>Invalid email format.</span>}
-          </label>
-          <label htmlFor={singUpPasswordId}>
-            <span>Password</span>
-            <div className={cls.wrapper}>
-              <input
-                className={`${isPasswordError && cls.singUpFormInputError}`}
-                value={passwordValue}
-                onChange={(e) => {
-                  const cleaned = e.target.value.replaceAll(" ", "");
-                  e.target.value = cleaned;
-                  setPasswordValue(cleaned);
-                }}
-                minLength={4}
-                placeholder={"Password"}
-                type={passwordVisible ? "text" : "password"}
-                id={singUpPasswordId}
-                onBlur={() => {
-                  setPasswordTouched(true);
-                }}
-              />
-              <button
-                className={cls.singUpFormEye}
-                type="button"
-                onClick={() => {
-                  isPasswordVisible((v) => !v);
-                }}
-              >
-                {passwordVisible ? <PasswordIconEyeClose /> : <PasswordIconEyeOpen />}
-              </button>
-            </div>
-
-            {isPasswordError && <span className={cls.singUpFormInputMessage}>4 characters minimum.</span>}
-          </label>
-          <label className={cls.singUpPrivacy} htmlFor={singUpPrivacyId}>
-            <input
-              checked={privacyCheckbox}
-              onChange={(e) => {
-                setPrivacyCheckbox(e.target.checked);
-              }}
-              type="checkbox"
-              id={singUpPrivacyId}
-            />
-            <span>
-              I agree to the MaToDo <Link to={"#"}>Privacy Policy</Link>
-            </span>
-          </label>
-
-          <button disabled={isSubmitDisabled} className={`${btn.btn} ${cls.singUpButton}`} type="submit">
-            Sing up
-          </button>
-        </form>
-        <div className={cls.singUpBlockSignIn}>
-          <span>Already on MaToDo?</span> <Link to={"#"}>Sing in</Link>
+            <button disabled={isSubmitDisabled} className={`${btn.btn} ${cls.singUpButton}`} type="submit">
+              Sing up
+            </button>
+          </form>
+          <div className={cls.singUpBlockSignIn}>
+            <span>Already on MaToDo?</span> <Link to={"#"}>Sing in</Link>
+          </div>
         </div>
       </div>
     </section>
