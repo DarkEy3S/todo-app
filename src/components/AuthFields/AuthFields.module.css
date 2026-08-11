@@ -1,0 +1,53 @@
+.label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.labelTitle {
+    color: var(--black2);
+    font-weight: 600;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    background-color: var(--gray7);
+    color: var(--black2);
+    padding: 8px;
+    border-radius: 2px;
+    border: 1px solid var(--black2);
+    transition: border 0.2s ease;
+}
+
+.wrapper:has(.eyeButton) .input {
+    padding-right: 30px;
+}
+
+.inputError {
+    border-color: var(--error);
+}
+
+.fieldMessage {
+    color: var(--error);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 85%;
+}
+
+.eyeButton {
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    outline: none;
+    background: unset;
+    cursor: pointer;
+    height: 14px;
+    width: 14px;
+    padding: 0;
+}

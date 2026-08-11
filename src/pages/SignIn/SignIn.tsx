@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useId } from "react";
 import btn from "../../assets/buttons.module.css";
 import { useState } from "react";
-import { PasswordIconEyeClose, PasswordIconEyeOpen, StringIconInfo, StringIconClear } from "../../components/icons";
+import { AuthErrorBanner } from "../../components/AuthErrorBanner";
+import { AuthFields } from "../../components/AuthFields";
 
 export const SignIn = () => {
   const signInEmailId: string = useId();
@@ -26,21 +27,7 @@ export const SignIn = () => {
   return (
     <section className={cls.signIn}>
       <div className={cls.signInContent}>
-        {textError && (
-          <div className={cls.signInunsucces}>
-            <div className={cls.stringIconInfo}>
-              <StringIconInfo />
-            </div>
-            <div className={cls.signInunsuccesMessage}>
-              <span>{textError}</span>
-            </div>
-            <div className={cls.stringIconClear}>
-              <button type="button" onClick={() => setTextError(null)}>
-                <StringIconClear />
-              </button>
-            </div>
-          </div>
-        )}
+        {textError && <AuthErrorBanner message={textError} onClose={() => setTextError(null)} />}
         <div className={cls.signInWrapper}>
           <h1 className={cls.signInTitle}>Sign in</h1>
           <form
@@ -53,63 +40,29 @@ export const SignIn = () => {
               } else setTextError(null);
             }}
           >
-            <label htmlFor={signInEmailId}>
-              <span>Email</span>
-              <div className={cls.wrapper}>
-                <input
-                  className={`${isEmailError && cls.signInFormInputError}`}
-                  value={emailValue}
-                  onChange={(e) => {
-                    const cleaned = e.target.value.replaceAll(" ", "");
-                    e.target.value = cleaned;
-                    setEmailValue(cleaned);
-                    setEmailValidity(e.target.checkValidity());
-                  }}
-                  id={signInEmailId}
-                  placeholder={"Email"}
-                  aria-placeholder={"Email"}
-                  type="email"
-                  onBlur={() => {
-                    setEmailTouched(true);
-                  }}
-                  required
-                />
-              </div>
-
-              {isEmailError && <span className={cls.signInFormInputMessage}>Invalid email format.</span>}
-            </label>
-            <label htmlFor={signInPasswordId}>
-              <span>Password</span>
-              <div className={cls.wrapper}>
-                <input
-                  className={`${isPasswordError && cls.signInFormInputError}`}
-                  value={passwordValue}
-                  onChange={(e) => {
-                    const cleaned = e.target.value.replaceAll(" ", "");
-                    e.target.value = cleaned;
-                    setPasswordValue(cleaned);
-                  }}
-                  minLength={4}
-                  placeholder={"Password"}
-                  type={passwordVisible ? "text" : "password"}
-                  id={signInPasswordId}
-                  onBlur={() => {
-                    setPasswordTouched(true);
-                  }}
-                />
-                <button
-                  className={cls.signInFormEye}
-                  type="button"
-                  onClick={() => {
-                    isPasswordVisible((v) => !v);
-                  }}
-                >
-                  {passwordVisible ? <PasswordIconEyeClose /> : <PasswordIconEyeOpen />}
-                </button>
-              </div>
-
-              {isPasswordError && <span className={cls.signInFormInputMessage}>4 characters minimum.</span>}
-            </label>
+            <AuthFields
+              emailId={signInEmailId}
+              passwordId={signInPasswordId}
+              emailValue={emailValue}
+              passwordValue={passwordValue}
+              onEmailChange={(e) => {
+                const cleaned = e.target.value.replaceAll(" ", "");
+                e.target.value = cleaned;
+                setEmailValue(cleaned);
+                setEmailValidity(e.target.checkValidity());
+              }}
+              onPasswordChange={(e) => {
+                const cleaned = e.target.value.replaceAll(" ", "");
+                e.target.value = cleaned;
+                setPasswordValue(cleaned);
+              }}
+              onEmailBlur={() => setEmailTouched(true)}
+              onPasswordBlur={() => setPasswordTouched(true)}
+              isEmailError={isEmailError}
+              isPasswordError={isPasswordError}
+              passwordVisible={passwordVisible}
+              onTogglePassword={() => isPasswordVisible((v) => !v)}
+            />
 
             <button disabled={isSubmitDisabled} className={`${btn.btn} ${cls.signInButton}`} type="submit">
               Sign in

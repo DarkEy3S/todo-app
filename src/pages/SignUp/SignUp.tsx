@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useId } from "react";
 import btn from "../../assets/buttons.module.css";
 import { useState } from "react";
-import { PasswordIconEyeClose, PasswordIconEyeOpen, StringIconInfo, StringIconClear } from "../../components/icons";
+import { AuthErrorBanner } from "../../components/AuthErrorBanner";
+import { AuthFields } from "../../components/AuthFields";
 
 export const SignUp = () => {
   const signUpEmailId: string = useId();
@@ -28,21 +29,8 @@ export const SignUp = () => {
   return (
     <section className={cls.signUp}>
       <div className={cls.signUpContent}>
-        {textError && (
-          <div className={cls.signUpunsucces}>
-            <div className={cls.stringIconInfo}>
-              <StringIconInfo />
-            </div>
-            <div className={cls.signUpunsuccesMessage}>
-              <span>{textError}</span>
-            </div>
-            <div className={cls.stringIconClear}>
-              <button type="button" onClick={() => setTextError(null)}>
-                <StringIconClear />
-              </button>
-            </div>
-          </div>
-        )}
+        {textError && <AuthErrorBanner message={textError} onClose={() => setTextError(null)} />}
+
         <div className={cls.signUpWrapper}>
           <h1 className={cls.signUpTitle}>Sign up</h1>
           <form
@@ -55,63 +43,29 @@ export const SignUp = () => {
               } else setTextError(null);
             }}
           >
-            <label htmlFor={signUpEmailId}>
-              <span>Email</span>
-              <div className={cls.wrapper}>
-                <input
-                  className={`${isEmailError && cls.signUpFormInputError}`}
-                  value={emailValue}
-                  onChange={(e) => {
-                    const cleaned = e.target.value.replaceAll(" ", "");
-                    e.target.value = cleaned;
-                    setEmailValue(cleaned);
-                    setEmailValidity(e.target.checkValidity());
-                  }}
-                  id={signUpEmailId}
-                  placeholder={"Email"}
-                  aria-placeholder={"Email"}
-                  type="email"
-                  onBlur={() => {
-                    setEmailTouched(true);
-                  }}
-                  required
-                />
-              </div>
-
-              {isEmailError && <span className={cls.signUpFormInputMessage}>Invalid email format.</span>}
-            </label>
-            <label htmlFor={signUpPasswordId}>
-              <span>Password</span>
-              <div className={cls.wrapper}>
-                <input
-                  className={`${isPasswordError && cls.signUpFormInputError}`}
-                  value={passwordValue}
-                  onChange={(e) => {
-                    const cleaned = e.target.value.replaceAll(" ", "");
-                    e.target.value = cleaned;
-                    setPasswordValue(cleaned);
-                  }}
-                  minLength={4}
-                  placeholder={"Password"}
-                  type={passwordVisible ? "text" : "password"}
-                  id={signUpPasswordId}
-                  onBlur={() => {
-                    setPasswordTouched(true);
-                  }}
-                />
-                <button
-                  className={cls.signUpFormEye}
-                  type="button"
-                  onClick={() => {
-                    isPasswordVisible((v) => !v);
-                  }}
-                >
-                  {passwordVisible ? <PasswordIconEyeClose /> : <PasswordIconEyeOpen />}
-                </button>
-              </div>
-
-              {isPasswordError && <span className={cls.signUpFormInputMessage}>4 characters minimum.</span>}
-            </label>
+            <AuthFields
+              emailId={signUpEmailId}
+              passwordId={signUpPasswordId}
+              emailValue={emailValue}
+              passwordValue={passwordValue}
+              onEmailChange={(e) => {
+                const cleaned = e.target.value.replaceAll(" ", "");
+                e.target.value = cleaned;
+                setEmailValue(cleaned);
+                setEmailValidity(e.target.checkValidity());
+              }}
+              onPasswordChange={(e) => {
+                const cleaned = e.target.value.replaceAll(" ", "");
+                e.target.value = cleaned;
+                setPasswordValue(cleaned);
+              }}
+              onEmailBlur={() => setEmailTouched(true)}
+              onPasswordBlur={() => setPasswordTouched(true)}
+              isEmailError={isEmailError}
+              isPasswordError={isPasswordError}
+              passwordVisible={passwordVisible}
+              onTogglePassword={() => isPasswordVisible((v) => !v)}
+            />
             <label className={cls.signUpPrivacy} htmlFor={signUpPrivacyId}>
               <input
                 checked={privacyCheckbox}
@@ -125,7 +79,6 @@ export const SignUp = () => {
                 I agree to the MaToDo <Link to={"#"}>Privacy Policy</Link>
               </span>
             </label>
-
             <button disabled={isSubmitDisabled} className={`${btn.btn} ${cls.signUpButton}`} type="submit">
               Sign up
             </button>
