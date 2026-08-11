@@ -17,6 +17,10 @@ export const MainLayout = () => {
 
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as Node;
+
+      if (target instanceof Element && target.closest("dialog")) {
+        return;
+      }
       if (
         sideNavRef.current &&
         !sideNavRef.current.contains(target) &&
