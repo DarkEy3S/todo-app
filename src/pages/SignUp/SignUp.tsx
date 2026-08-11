@@ -51,7 +51,7 @@ export const SignUp = () => {
                 id={signUpPrivacyId}
               />
               <span>
-                I agree to the MaToDo <Link to={"#"}>Privacy Policy</Link>
+                I agree to the MaToDo <Link to="/privacy">Privacy Policy</Link>
               </span>
             </label>
             <button disabled={isSubmitDisabled} className={`${btn.btn} ${cls.signUpButton}`} type="submit">

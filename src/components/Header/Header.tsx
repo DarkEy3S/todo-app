@@ -29,7 +29,7 @@ export const Header = ({ burgerFunction, burgerActive, burgerBtnRef }: HeaderPro
           <img src={logoSvg} alt="logo" />
           <span>MaToDo</span>
         </Link>
-        <Link to={"#"} className={cls.headerPrivacy}>
+        <Link to={"/privacy"} className={cls.headerPrivacy}>
           Privacy
         </Link>
         <div className={cls.headerAccounts}>
@@ -47,7 +47,7 @@ export const Header = ({ burgerFunction, burgerActive, burgerBtnRef }: HeaderPro
       </div>
       <div className={cls.headerBottom}>
         <p className={cls.headerText}>Our Site may use “cookies” to enhance User experience.</p>
-        <Link to={"#"} className={cls.headerPrivacy}>
+        <Link to={"/privacy"} className={cls.headerPrivacy}>
           Privacy
         </Link>
       </div>
