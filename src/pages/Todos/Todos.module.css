@@ -1,0 +1,240 @@
+.todos {
+    background-color: var(--secondary);
+    width: 100%;
+    height: 100%;
+}
+
+.todosContent {
+    background-color: var(--grey7);
+    border-radius: 4px;
+}
+
+.todosTop {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--grey5);
+    padding: 32px 0;
+    @media (max-width: 1920px) {
+        padding: 24px 0;
+    }
+    @media (max-width: 1440px) {
+        padding: 32px 14px;
+    }
+    @media (max-width: 834px) {
+        padding: 20px 14px;
+    }
+
+}
+.todosSearch {
+    position: relative;
+    flex: 0 1 300px;
+    @media (max-width: 834px) {
+        flex: 1 1 auto;
+
+    }
+}
+
+.todoSearchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.todosSearchInput {
+    background-color: var(--white);
+    outline: none;
+    border: 1px solid var(--grey110);
+    padding: 8px 8px 8px 40px;
+    color: var(--black2);
+    flex: 1 1 300px;
+    font-size: 14px;
+    width: 100%;
+
+}
+
+.todosBottom {
+    padding: 24px 126px 64px 126px;
+    @media (max-width: 1920px) {
+        padding: 20px 123px 56px 123px;
+    }
+    @media (max-width: 1440px) {
+        padding: 24px 84px 60px 84px;
+    }
+    @media (max-width: 834px) {
+        padding: 16px 14px 36px 14px;
+    }
+}
+.todosTitleWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    @media (max-width: 1440px) {
+        margin-bottom: 24px;
+
+    }
+}
+
+.todosTitle {
+    font-size: 22px;
+    color: var(--secondary);
+
+    @media (max-width: 1920px) {
+        font-size: 20px;
+
+    }
+    @media (max-width: 1440px) {
+        font-size: 18px;
+
+    }
+    @media (max-width: 834px) {
+        font-size: 16px;
+
+    }
+}
+.todosAdd {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    @media (max-width: 1440px) {
+        margin-bottom: 32px;
+    }
+    @media (max-width: 834px) {
+        margin-bottom: 24px;
+    }
+}
+.todosAddInput {
+    flex: 0 1 300px;
+    background-color: var(--grey7);
+    border: 1px solid var(--grey2);
+    outline: none;
+    padding: 8px;
+    color: var(--black2);
+    font-size: 12px;
+
+    @media (max-width: 440px) {
+        flex: 1 1 100%;
+        max-width: 440px;
+    }
+}
+
+
+
+
+.todosAddButton {
+    @media (max-width: 440px) {
+        flex: 1 1 auto;
+    }
+}
+
+
+
+.todosListTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.todosListStatus {
+    display: flex;
+    max-width: 268px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.todosListStatusButton {
+    padding: 10px 0;
+    margin: 0 8px;
+    background: unset;
+    color: var(--black2);
+    outline: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+.todosListStatusButtonActive {
+    border-bottom: 2px solid var(--primary);
+}
+
+.todosListSort {
+    display: flex;
+    gap: 6px;
+}
+
+.todosListSortArrow {
+    background: unset;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.todosListSortText {
+    font-size: 12px;
+    background: unset;
+    border: none;
+    outline: none;
+    color: var(--black2);
+    cursor: pointer;
+}
+
+.todosListBottom {
+    min-height: 608px;
+    border-radius: 2px;
+    border: 1px solid var(--grey4);
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 1920px) {
+
+        min-height: 570px;
+    }
+    @media (max-width: 834px) {
+        min-height: 400px;
+        border: unset;
+        border-top: 1px solid var(--grey4);
+
+    }
+}
+
+.todosNoProjects {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: var(--black2);
+    font-size: 14px;
+
+
+    @media (max-width: 1920px) {
+        gap: 20px;
+        font-size: 12px;
+    }
+
+}
+
+@media (max-width: 834px) {
+    .todosListSortDesktopHidden  {
+        display: flex;
+    }
+    .todosListSortMobileHidden {
+        display: none;
+
+    }
+}
+@media (min-width: 834px) {
+    .todosListSortDesktopHidden  {
+        display: none;
+    }
+    .todosListSortMobileHidden {
+        display: flex;
+
+    }
+}

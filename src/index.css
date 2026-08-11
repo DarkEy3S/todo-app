@@ -11,13 +11,13 @@
     --black1: #000;
     --black2: #201f1e;
     --black3: #323130;
-    --gray1: #605e5c;
-    --gray2: #8a8886;
-    --gray3: #a19f9d;
-    --gray4: #ddd;
-    --gray5: #edebe9;
-    --gray6: #f2f2f2;
-    --gray7: #fcfcfc;
+    --grey1: #605e5c;
+    --grey2: #8a8886;
+    --grey3: #a19f9d;
+    --grey4: #ddd;
+    --grey5: #edebe9;
+    --grey6: #f2f2f2;
+    --grey7: #fcfcfc;
     --grey20: #f3f2f1;
     --grey90: #a19f9d;
     --grey110: #8a8886;
@@ -40,7 +40,7 @@
     font-size: 24px;
     line-height: 165%;
     color-scheme: light dark;
-    color: var(--primary);
+    color: var(--secondary);
     background-color: var(--white);
 }
 
@@ -54,8 +54,12 @@
 
 
 a {
-    color: inherit;
+    color: var(--primary);
     text-decoration: inherit;
+    transition: color .2s ease-in-out;
+}
+a:hover {
+    color: var(--secondary);
 }
 
 body {
@@ -289,7 +293,7 @@ input[type="password"]::-ms-clear {
 .container {
     max-width: 860px;
     margin: 0 auto;
-    padding: 100px 0;
+    padding: 125px 0;
     @media (max-width: 1920px) {
         max-width: 816px;
         padding: 95px 0;

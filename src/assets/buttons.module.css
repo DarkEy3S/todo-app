@@ -8,7 +8,7 @@
     cursor: pointer;
     font-size: 14px;
     border-radius: 2px;
-    transition: background-color .2s ease-in-out;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
 
     &:disabled {
         background-color: var(--grey20);
