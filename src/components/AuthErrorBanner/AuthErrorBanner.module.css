@@ -1,0 +1,31 @@
+.banner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #F7E1E3;
+    padding: 12px 8px;
+    height: 32px;
+    align-items: center;
+}
+
+.iconInfo,
+.iconClear {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message {
+    color: var(--black2);
+    text-align: left;
+    flex: 1 1 auto;
+    padding: 0 8px;
+    font-size: 12px;
+}
+
+.iconClear button {
+    cursor: pointer;
+    background-color: unset;
+    border: none;
+    padding: 0;
+}

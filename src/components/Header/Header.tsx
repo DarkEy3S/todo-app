@@ -38,8 +38,10 @@ export const Header = ({ burgerFunction, burgerActive, burgerBtnRef }: HeaderPro
             <span>Sign up</span>
           </Link>
           <p>
-            <SignInIcon />
-            <span>Sign in</span>
+            <Link to={"/signin"}>
+              <SignInIcon />
+              <span>Sign in</span>
+            </Link>
           </p>
         </div>
       </div>

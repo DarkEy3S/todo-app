@@ -1,26 +1,20 @@
-import cls from "./SignUp.module.css";
+import cls from "./SignIn.module.css";
 import { Link } from "react-router-dom";
 import btn from "../../assets/buttons.module.css";
 import { AuthErrorBanner } from "../../components/AuthErrorBanner";
 import { AuthFields } from "../../components/AuthFields";
 import { useAuthForm } from "../../hooks/useAuthForm";
-import { useId, useState } from "react";
 
-export const SignUp = () => {
+export const SignIn = () => {
   const form = useAuthForm();
-  const signUpPrivacyId = useId();
-  const [privacyCheckbox, setPrivacyCheckbox] = useState(false);
-  const isSubmitDisabled = form.isFieldsDisabled || !privacyCheckbox;
-
   return (
-    <section className={cls.signUp}>
-      <div className={cls.signUpContent}>
+    <section className={cls.signIn}>
+      <div className={cls.signInContent}>
         {form.textError && <AuthErrorBanner message={form.textError} onClose={form.clearError} />}
-
-        <div className={cls.signUpWrapper}>
-          <h1 className={cls.signUpTitle}>Sign up</h1>
+        <div className={cls.signInWrapper}>
+          <h1 className={cls.signInTitle}>Sign in</h1>
           <form
-            className={cls.signUpForm}
+            className={cls.signInForm}
             action=""
             onSubmit={(event) => {
               event.preventDefault();
@@ -43,23 +37,16 @@ export const SignUp = () => {
               passwordVisible={form.passwordVisible}
               onTogglePassword={form.togglePasswordVisible}
             />
-            <label className={cls.signUpPrivacy} htmlFor={signUpPrivacyId}>
-              <input
-                checked={privacyCheckbox}
-                onChange={(e) => setPrivacyCheckbox(e.target.checked)}
-                type="checkbox"
-                id={signUpPrivacyId}
-              />
-              <span>
-                I agree to the MaToDo <Link to={"#"}>Privacy Policy</Link>
-              </span>
-            </label>
-            <button disabled={isSubmitDisabled} className={`${btn.btn} ${cls.signUpButton}`} type="submit">
-              Sign up
+
+            <button disabled={form.isFieldsDisabled} className={`${btn.btn} ${cls.signInButton}`} type="submit">
+              Sign in
             </button>
           </form>
-          <div className={cls.signUpBlockSignIn}>
-            <span>Already on MaToDo?</span> <Link to={"/signin"}>Sign in</Link>
+          <div className={cls.signInPageForgot}>
+            <Link to={"#"}>Forgot password?</Link>
+          </div>
+          <div className={cls.signInBlockSignIn}>
+            <span>Already on MaToDo?</span> <Link to={"/signup"}>Sign up</Link>
           </div>
         </div>
       </div>
