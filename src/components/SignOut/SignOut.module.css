@@ -1,0 +1,52 @@
+.signOutContent {
+    text-align: center;
+
+}
+
+.signOutTitle {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 28px;
+
+}
+
+.signOutButtons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    a, button {
+        border-radius: 2px;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 6px 20px;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .whiteButton{
+        background-color: var(--white);
+        color: var(--grey190);
+        border: 1px solid var(--grey110);
+        transition: background-color .2s ease-in-out, color .2s ease-in-out;
+
+    }
+    .whiteButton:hover {
+        background-color: var(--grey110);
+        color: var(--white);
+    }
+    .blueButton {
+        background-color: var(--primary);
+        color: var(--white);
+        border: 1px solid var(--primary);
+        transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    }
+    .blueButton:hover {
+        background-color: var(--s2);
+        border: 1px solid var(--s2);
+    }
+
+
+
+
+}

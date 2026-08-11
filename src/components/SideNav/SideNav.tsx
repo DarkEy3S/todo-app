@@ -1,13 +1,19 @@
 import cls from "./SideNav.module.css";
-import { HomeIcon, SignOutIcon, TodosIcon } from "../icons.tsx";
+import { HomeIcon, SignOutIcon, TodosIcon } from "../icons";
 import { Link } from "react-router-dom";
 import { Profile } from "../Profile";
 import { forwardRef } from "react";
+import { Modal } from "../Modal";
+import { SignOut } from "../SignOut";
+import { useDisclosure } from "../../hooks/useDisclosure";
+
 interface IProp {
   className: string;
 }
 
 export const SideNav = forwardRef<HTMLDivElement, IProp>(({ className }, ref) => {
+  const { isOpen, open, close } = useDisclosure();
+
   return (
     <aside ref={ref} className={`${cls.sideNav} ${className}`}>
       <div className={cls.sideWrapper}>
@@ -27,13 +33,27 @@ export const SideNav = forwardRef<HTMLDivElement, IProp>(({ className }, ref) =>
               </Link>
             </li>
             <li>
-              <Link to={"/"}>
+              <button type={"button"} onClick={open}>
                 <SignOutIcon /> Sign out
-              </Link>
+              </button>
             </li>
           </ul>
         </div>
       </div>
+      <Modal
+        isOpen={isOpen}
+        title={"Sign out"}
+        children={
+          <SignOut
+            onClose={close}
+            handleSignOut={() => {
+              console.log("Sing out success");
+              close();
+            }}
+          />
+        }
+        onClose={close}
+      />
     </aside>
   );
 });
