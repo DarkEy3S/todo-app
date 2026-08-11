@@ -284,3 +284,23 @@ input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
   display: none;
 }
+
+
+.container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 100px 0;
+    @media (max-width: 1920px) {
+        max-width: 816px;
+        padding: 95px 0;
+    }
+    @media (max-width: 1440px) {
+        max-width: calc(100% - (48 * 2) * 1px);
+        padding: 72px 0;
+    }
+
+    @media (max-width: 834px) {
+        max-width: calc(100% - (16 * 2) * 1px);
+        padding: 24px 0;
+    }
+}
