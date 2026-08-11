@@ -1,0 +1,4 @@
+services:
+  react-app:
+    ports:
+      - "${PORT:-8080}:80"

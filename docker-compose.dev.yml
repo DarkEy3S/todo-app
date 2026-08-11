@@ -1,0 +1,7 @@
+services:
+  react-app:
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - .:/app
+      - /app/node_modules
