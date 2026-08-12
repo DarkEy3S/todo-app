@@ -23,14 +23,12 @@
     @media (max-width: 834px) {
         padding: 20px 14px;
     }
-
 }
 .todosSearch {
     position: relative;
     flex: 0 1 300px;
     @media (max-width: 834px) {
         flex: 1 1 auto;
-
     }
 }
 
@@ -41,7 +39,6 @@
     transform: translateY(-50%);
 }
 
-
 .todosSearchInput {
     background-color: var(--white);
     outline: none;
@@ -51,7 +48,6 @@
     flex: 1 1 300px;
     font-size: 14px;
     width: 100%;
-
 }
 
 .todosBottom {
@@ -73,7 +69,6 @@
     margin-bottom: 20px;
     @media (max-width: 1440px) {
         margin-bottom: 24px;
-
     }
 }
 
@@ -83,15 +78,12 @@
 
     @media (max-width: 1920px) {
         font-size: 20px;
-
     }
     @media (max-width: 1440px) {
         font-size: 18px;
-
     }
     @media (max-width: 834px) {
         font-size: 16px;
-
     }
 }
 .todosAdd {
@@ -121,16 +113,11 @@
     }
 }
 
-
-
-
 .todosAddButton {
     @media (max-width: 440px) {
         flex: 1 1 auto;
     }
 }
-
-
 
 .todosListTop {
     display: flex;
@@ -138,14 +125,12 @@
     justify-content: space-between;
 }
 
-
 .todosListStatus {
     display: flex;
     max-width: 268px;
     width: 100%;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .todosListStatusButton {
@@ -184,21 +169,26 @@
 }
 
 .todosListBottom {
-    min-height: 608px;
     border-radius: 2px;
     border: 1px solid var(--grey4);
     display: flex;
     flex-direction: column;
 
-    @media (max-width: 1920px) {
+    @media (max-width: 834px) {
+        border: unset;
+        border-top: 1px solid var(--grey4);
+    }
+}
 
+.todosListBottom:has(.todosNoProjects) {
+    min-height: 608px;
+    @media (max-width: 1920px) {
         min-height: 570px;
     }
     @media (max-width: 834px) {
         min-height: 400px;
         border: unset;
         border-top: 1px solid var(--grey4);
-
     }
 }
 
@@ -212,29 +202,87 @@
     color: var(--black2);
     font-size: 14px;
 
-
     @media (max-width: 1920px) {
         gap: 20px;
         font-size: 12px;
     }
-
 }
 
 @media (max-width: 834px) {
-    .todosListSortDesktopHidden  {
+    .todosListSortDesktopHidden {
         display: flex;
     }
     .todosListSortMobileHidden {
         display: none;
-
     }
 }
 @media (min-width: 834px) {
-    .todosListSortDesktopHidden  {
+    .todosListSortDesktopHidden {
         display: none;
     }
     .todosListSortMobileHidden {
         display: flex;
-
     }
+}
+
+.todosItems {
+}
+
+.todosItem {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+}
+.todosItem + .todosItem {
+    border-top: 1px solid var(--grey5);
+}
+
+.todosItemCheckbox {
+display: flex;
+    input {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.todosItemContent {
+    flex: 1 1 auto;
+    margin: 0 4px;
+    
+}
+
+.todosItemContentText {
+    padding: 0 4px ;
+    color: var(--black2);
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 4px;
+    
+}
+
+.todosItemContentDate {
+    color: var(--grey1);
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.todosItemButtons {
+        display: flex;
+        gap: 17px;
+        align-self: center;
+
+    button {
+        cursor: pointer;
+        background: unset;
+        outline: unset;
+        border: unset;
+        
+    }
+
+}
+
+.todosItemEdit {
+}
+
+.todosItemDelet {
 }

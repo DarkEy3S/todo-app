@@ -1,5 +1,5 @@
 import cls from "./Todos.module.css";
-import { IconNoProjects, IconSearch, IconSort } from "../../components/icons";
+import { IconNoProjects, IconSearch, IconSort, IconEdit, IconDelete } from "../../components/icons";
 import btn from "../../assets/buttons.module.css";
 
 export const Todos = () => {
@@ -54,10 +54,66 @@ export const Todos = () => {
                 </div>
               </div>
               <div className={cls.todosListBottom}>
-                <div className={cls.todosNoProjects}>
-                  <IconNoProjects />
-                  <span>No todos yet</span>
-                </div>
+                {false ? (
+                  <div className={cls.todosNoProjects}>
+                    <IconNoProjects />
+                    <span>No todos yet</span>
+                  </div>
+                ) : (
+                  <div className={cls.todosItems}>
+                    <div className={cls.todosItem}>
+                      <div className={cls.todosItemCheckbox}>
+                        <input type="checkbox" name="" id="" />
+                      </div>
+                      <div className={cls.todosItemContent}>
+                        <p className={cls.todosItemContentText}>Project name</p>
+                        <span className={cls.todosItemContentDate}>January 3, 2022, Monday</span>
+                      </div>
+                      <div className={cls.todosItemButtons}>
+                        <button type="button" className={cls.todosItemEdit}>
+                          <IconEdit />
+                        </button>
+                        <button type="button" className="cls.todosItemDelet">
+                          <IconDelete />
+                        </button>
+                      </div>
+                    </div>
+                    <div className={cls.todosItem}>
+                      <div className={cls.todosItemCheckbox}>
+                        <input type="checkbox" name="" id="" />
+                      </div>
+                      <div className={cls.todosItemContent}>
+                        <p className={cls.todosItemContentText}>Project name</p>
+                        <span className={cls.todosItemContentDate}>January 3, 2022, Monday</span>
+                      </div>
+                      <div className={cls.todosItemButtons}>
+                        <button type="button" className={cls.todosItemEdit}>
+                          <IconEdit />
+                        </button>
+                        <button type="button" className="cls.todosItemDelet">
+                          <IconDelete />
+                        </button>
+                      </div>
+                    </div>
+                    <div className={cls.todosItem}>
+                      <div className={cls.todosItemCheckbox}>
+                        <input type="checkbox" name="" id="" />
+                      </div>
+                      <div className={cls.todosItemContent}>
+                        <p className={cls.todosItemContentText}>Project name</p>
+                        <span className={cls.todosItemContentDate}>January 3, 2022, Monday</span>
+                      </div>
+                      <div className={cls.todosItemButtons}>
+                        <button type="button" className={cls.todosItemEdit}>
+                          <IconEdit />
+                        </button>
+                        <button type="button" className="cls.todosItemDelet">
+                          <IconDelete />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
