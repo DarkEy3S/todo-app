@@ -1,7 +1,7 @@
 import cls from "./Todos.module.css";
 import { IconNoProjects, IconSearch, IconSort, IconEdit, IconDelete } from "../../components/icons";
 import btn from "../../assets/buttons.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface ITodo {
   id: string;
@@ -9,6 +9,9 @@ interface ITodo {
   completed: boolean;
   createdAt: Date;
 }
+
+type Filter = "all" | "active" | "completed";
+type SortBy = "alphabetical" | "date";
 
 export const Todos = () => {
   const [todos, setTodos] = useState<ITodo[]>([
@@ -31,8 +34,85 @@ export const Todos = () => {
       createdAt: new Date("2022-01-03"),
     },
   ]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterStatus, setFilterStatus] = useState<Filter>("all");
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editDraft, setEditDraft] = useState("");
+  const [isSortOpen, setSortOpen] = useState(false);
+  const [sortBy, setSortBy] = useState<SortBy>("date");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
 
   const [todoCreateValue, setTodoCreateValue] = useState("");
+
+  const visibleTodos = todos
+    .filter((todo) => {
+      if (filterStatus === "all") return true;
+      if (filterStatus === "active") return !todo.completed;
+      return todo.completed;
+    })
+    .filter((todo) => todo.text.toLowerCase().includes(searchQuery.trim().toLowerCase()))
+    .sort((a, b) => {
+      const result = sortBy === "alphabetical" ? a.text.localeCompare(b.text) : a.createdAt.getTime() - b.createdAt.getTime();
+      return sortDir === "asc" ? result : -result;
+    });
+
+  const getEmptyMessage = () => {
+    if (todos.length === 0) return "No todos yet";
+    if (searchQuery.trim()) return "No matching todos";
+    if (filterStatus === "active") return "No active todos";
+    if (filterStatus === "completed") return "No completed todos";
+    return "Nothing to show";
+  };
+
+  const renderSort = () => (
+    <div className={cls.todosListSort} onClick={(e) => e.stopPropagation()}>
+      <button
+        className={`${cls.todosListSortArrow} ${sortDir === "desc" ? cls.todosListSortArrowDesc : ""}`}
+        type="button"
+        onClick={() => {
+          setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+        }}
+      >
+        <IconSort />
+      </button>
+      <button className={cls.todosListSortText} type="button" onClick={() => setSortOpen((v) => !v)}>
+        Sort by
+      </button>
+      {isSortOpen && (
+        <div className={cls.todosListSortMenu}>
+          <button
+            type={"button"}
+            onClick={() => {
+              setSortBy("alphabetical");
+
+              setSortOpen((v) => !v);
+            }}
+          >
+            {sortBy === "alphabetical" && <span className={cls.todosListSortCheck}>✓</span>}
+            Alphabetical
+          </button>
+          <button
+            type={"button"}
+            onClick={() => {
+              setSortBy("date");
+
+              setSortOpen((v) => !v);
+            }}
+          >
+            {sortBy === "date" && <span className={cls.todosListSortCheck}>✓</span>}
+            Date
+          </button>
+        </div>
+      )}
+    </div>
+  );
+
+  useEffect(() => {
+    if (!isSortOpen) return;
+    const close = () => setSortOpen(false);
+    document.addEventListener("click", close);
+    return () => document.removeEventListener("click", close);
+  }, [isSortOpen]);
 
   return (
     <section className={cls.todos}>
@@ -41,20 +121,19 @@ export const Todos = () => {
           <div className={cls.todosTop}>
             <div className={cls.todosSearch}>
               <IconSearch className={cls.todoSearchIcon} />
-              <input className={cls.todosSearchInput} type={"search"} placeholder="Search some todo..." />
+              <input
+                className={cls.todosSearchInput}
+                type={"search"}
+                placeholder="Search some todo..."
+                onChange={(e) => setSearchQuery(e.target.value)}
+                value={searchQuery}
+              />
             </div>
           </div>
           <div className={cls.todosBottom}>
             <div className={cls.todosTitleWrapper}>
               <h1 className={cls.todosTitle}>Todos</h1>
-              <div className={`${cls.todosListSort} ${cls.todosListSortDesktopHidden}`}>
-                <button className={cls.todosListSortArrow} type={"button"}>
-                  <IconSort />
-                </button>
-                <button className={cls.todosListSortText} type={"button"}>
-                  Sort by
-                </button>
-              </div>
+              <div className={cls.todosListSortDesktopHidden}>{renderSort()}</div>
             </div>
             <div className={cls.todosAdd}>
               <input
@@ -73,7 +152,7 @@ export const Todos = () => {
                     ...prev,
                     {
                       id: crypto.randomUUID(),
-                      text: todoCreateValue,
+                      text: todoCreateValue.trim(),
                       completed: false,
                       createdAt: new Date(),
                     },
@@ -87,34 +166,45 @@ export const Todos = () => {
             <div className={cls.todosList}>
               <div className={cls.todosListTop}>
                 <div className={cls.todosListStatus}>
-                  <button className={`${cls.todosListStatusButton} ${cls.todosListStatusButtonActive}`} type={"button"}>
+                  <button
+                    className={`${cls.todosListStatusButton} ${filterStatus === "all" && cls.todosListStatusButtonActive}`}
+                    type={"button"}
+                    onClick={() => {
+                      setFilterStatus("all");
+                    }}
+                  >
                     All
                   </button>
-                  <button className={cls.todosListStatusButton} type={"button"}>
+                  <button
+                    className={`${cls.todosListStatusButton} ${filterStatus === "active" && cls.todosListStatusButtonActive}`}
+                    type={"button"}
+                    onClick={() => {
+                      setFilterStatus("active");
+                    }}
+                  >
                     Active
                   </button>
-                  <button className={cls.todosListStatusButton} type={"button"}>
+                  <button
+                    className={`${cls.todosListStatusButton} ${filterStatus === "completed" && cls.todosListStatusButtonActive}`}
+                    type={"button"}
+                    onClick={() => {
+                      setFilterStatus("completed");
+                    }}
+                  >
                     Completed
                   </button>
                 </div>
-                <div className={`${cls.todosListSort} ${cls.todosListSortMobileHidden}`}>
-                  <button className={cls.todosListSortArrow} type={"button"}>
-                    <IconSort />
-                  </button>
-                  <button className={cls.todosListSortText} type={"button"}>
-                    Sort by
-                  </button>
-                </div>
+                <div className={cls.todosListSortMobileHidden}>{renderSort()}</div>
               </div>
               <div className={cls.todosListBottom}>
-                {todos.length <= 0 ? (
+                {visibleTodos.length <= 0 ? (
                   <div className={cls.todosNoProjects}>
                     <IconNoProjects />
-                    <span>No todos yet</span>
+                    <span>{getEmptyMessage()}</span>
                   </div>
                 ) : (
                   <div className={cls.todosItems}>
-                    {todos.map((todo) => (
+                    {visibleTodos.map((todo) => (
                       <div key={todo.id} className={cls.todosItem}>
                         <div className={cls.todosItemCheckbox}>
                           <input
@@ -131,7 +221,49 @@ export const Todos = () => {
                           />
                         </div>
                         <div className={cls.todosItemContent}>
-                          <p className={cls.todosItemContentText}>{todo.text}</p>
+                          <div className={`${cls.todosItemContentText} ${todo.completed && cls.todosItemContentTextCompleted}`}>
+                            {editingId === todo.id ? (
+                              <>
+                                <input
+                                  className={cls.todosAddInput}
+                                  type="text"
+                                  value={editDraft}
+                                  onChange={(e) => {
+                                    setEditDraft(e.target.value);
+                                  }}
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Escape") setEditingId(null);
+                                    if (e.key === "Enter") {
+                                      setTodos((prev) => {
+                                        if (editDraft.trim() === "") return [...prev];
+                                        return prev.map((item) =>
+                                          item.id === editingId ? { ...item, text: editDraft.trim() } : item,
+                                        );
+                                      });
+                                      setEditingId(null);
+                                    }
+                                  }}
+                                />
+                                <button
+                                  className={`${btn.btn} ${cls.btnEditSave}`}
+                                  type={"button"}
+                                  onClick={() => {
+                                    setTodos((prev) => {
+                                      if (editDraft.trim() === "") return [...prev];
+                                      return prev.map((item) =>
+                                        item.id === editingId ? { ...item, text: editDraft.trim() } : item,
+                                      );
+                                    });
+                                    setEditingId(null);
+                                  }}
+                                >
+                                  Save
+                                </button>
+                              </>
+                            ) : (
+                              <span>{todo.text}</span>
+                            )}
+                          </div>
                           <span className={cls.todosItemContentDate}>
                             {todo.createdAt.toLocaleDateString("en-US", {
                               year: "numeric",
@@ -142,14 +274,21 @@ export const Todos = () => {
                           </span>
                         </div>
                         <div className={cls.todosItemButtons}>
-                          <button type="button" className={cls.todosItemEdit}>
+                          <button
+                            type="button"
+                            className={cls.todosItemEdit}
+                            onClick={() => {
+                              setEditingId(todo.id);
+                              setEditDraft(todo.text);
+                            }}
+                          >
                             <IconEdit />
                           </button>
                           <button
                             type="button"
-                            className="cls.todosItemDelet"
+                            className={cls.todosItemDelete}
                             onClick={() => {
-                              setTodos((prev) => prev.filter((item) => item.id != todo.id));
+                              setTodos((prev) => prev.filter((item) => item.id !== todo.id));
                             }}
                           >
                             <IconDelete />

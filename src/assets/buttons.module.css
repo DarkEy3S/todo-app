@@ -9,7 +9,7 @@
     font-size: 14px;
     border-radius: 2px;
     transition: background-color .2s ease-in-out, color .2s ease-in-out;
-
+    line-height: 100%;
     &:disabled {
         background-color: var(--grey20);
         color: var(--grey90);
