@@ -41,6 +41,7 @@ export const Todos = () => {
   const [isSortOpen, setSortOpen] = useState(false);
   const [sortBy, setSortBy] = useState<SortBy>("date");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const [todoCreateValue, setTodoCreateValue] = useState("");
 
@@ -62,6 +63,20 @@ export const Todos = () => {
     if (filterStatus === "active") return "No active todos";
     if (filterStatus === "completed") return "No completed todos";
     return "Nothing to show";
+  };
+
+  const saveEdit = () => {
+    if (!editingId) return;
+    const text = editDraft.trim();
+    if (text) setTodos((prev) => prev.map((item) => (item.id === editingId ? { ...item, text } : item)));
+    setEditingId(null);
+  };
+
+  const addTodo = () => {
+    const text = todoCreateValue.trim();
+    if (!text) return;
+    setTodos((prev) => [...prev, { id: crypto.randomUUID(), text, completed: false, createdAt: new Date() }]);
+    setTodoCreateValue("");
   };
 
   const renderSort = () => (
@@ -136,29 +151,24 @@ export const Todos = () => {
               <div className={cls.todosListSortDesktopHidden}>{renderSort()}</div>
             </div>
             <div className={cls.todosAdd}>
-              <input
+              <textarea
                 className={cls.todosAddInput}
                 value={todoCreateValue}
-                type="text"
-                placeholder={"Add a todo"}
+                placeholder="Add a todo"
+                rows={1}
                 onChange={(e) => setTodoCreateValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault();
+                    addTodo();
+                  }
+                }}
               />
               <button
-                disabled={todoCreateValue.trim() === ""}
+                disabled={!todoCreateValue.trim()}
                 className={`${cls.todosAddButton} ${btn.btn}`}
-                type={"button"}
-                onClick={() => {
-                  setTodos((prev) => [
-                    ...prev,
-                    {
-                      id: crypto.randomUUID(),
-                      text: todoCreateValue.trim(),
-                      completed: false,
-                      createdAt: new Date(),
-                    },
-                  ]);
-                  setTodoCreateValue("");
-                }}
+                type="button"
+                onClick={addTodo}
               >
                 Add
               </button>
@@ -205,7 +215,15 @@ export const Todos = () => {
                 ) : (
                   <div className={cls.todosItems}>
                     {visibleTodos.map((todo) => (
-                      <div key={todo.id} className={cls.todosItem}>
+                      <div
+                        key={todo.id}
+                        className={`${cls.todosItem} ${deletingId === todo.id ? cls.todosItemDeleting : ""}`}
+                        onAnimationEnd={(e) => {
+                          if (e.target !== e.currentTarget || deletingId !== todo.id) return;
+                          setTodos((prev) => prev.filter((item) => item.id !== todo.id));
+                          setDeletingId(null);
+                        }}
+                      >
                         <div className={cls.todosItemCheckbox}>
                           <input
                             checked={todo.completed}
@@ -221,49 +239,41 @@ export const Todos = () => {
                           />
                         </div>
                         <div className={cls.todosItemContent}>
-                          <div className={`${cls.todosItemContentText} ${todo.completed && cls.todosItemContentTextCompleted}`}>
-                            {editingId === todo.id ? (
-                              <>
-                                <input
-                                  className={cls.todosAddInput}
-                                  type="text"
-                                  value={editDraft}
-                                  onChange={(e) => {
-                                    setEditDraft(e.target.value);
-                                  }}
-                                  onKeyDown={(e) => {
-                                    if (e.key === "Escape") setEditingId(null);
-                                    if (e.key === "Enter") {
-                                      setTodos((prev) => {
-                                        if (editDraft.trim() === "") return [...prev];
-                                        return prev.map((item) =>
-                                          item.id === editingId ? { ...item, text: editDraft.trim() } : item,
-                                        );
-                                      });
-                                      setEditingId(null);
-                                    }
-                                  }}
-                                />
-                                <button
-                                  className={`${btn.btn} ${cls.btnEditSave}`}
-                                  type={"button"}
-                                  onClick={() => {
-                                    setTodos((prev) => {
-                                      if (editDraft.trim() === "") return [...prev];
-                                      return prev.map((item) =>
-                                        item.id === editingId ? { ...item, text: editDraft.trim() } : item,
-                                      );
-                                    });
-                                    setEditingId(null);
-                                  }}
-                                >
-                                  Save
-                                </button>
-                              </>
-                            ) : (
+                          {editingId === todo.id ? (
+                            <div
+                              className={cls.todosItemEditRow}
+                              onBlur={(e) => {
+                                if (!e.currentTarget.contains(e.relatedTarget)) saveEdit();
+                              }}
+                            >
+                              <textarea
+                                className={cls.todosItemEditInput}
+                                value={editDraft}
+                                autoFocus
+                                rows={1}
+                                onChange={(e) => setEditDraft(e.target.value)}
+                                onKeyDown={(e) => {
+                                  if (e.key === "Escape") setEditingId(null);
+                                  if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+                                    e.preventDefault();
+                                    saveEdit();
+                                  }
+                                }}
+                              />
+                              <button
+                                className={`${btn.btn} ${cls.btnEditSave}`}
+                                type="button"
+                                disabled={!editDraft.trim()}
+                                onClick={saveEdit}
+                              >
+                                Save
+                              </button>
+                            </div>
+                          ) : (
+                            <div className={`${cls.todosItemContentText} ${todo.completed && cls.todosItemContentTextCompleted}`}>
                               <span>{todo.text}</span>
-                            )}
-                          </div>
+                            </div>
+                          )}
                           <span className={cls.todosItemContentDate}>
                             {todo.createdAt.toLocaleDateString("en-US", {
                               year: "numeric",
@@ -273,27 +283,30 @@ export const Todos = () => {
                             })}
                           </span>
                         </div>
-                        <div className={cls.todosItemButtons}>
-                          <button
-                            type="button"
-                            className={cls.todosItemEdit}
-                            onClick={() => {
-                              setEditingId(todo.id);
-                              setEditDraft(todo.text);
-                            }}
-                          >
-                            <IconEdit />
-                          </button>
-                          <button
-                            type="button"
-                            className={cls.todosItemDelete}
-                            onClick={() => {
-                              setTodos((prev) => prev.filter((item) => item.id !== todo.id));
-                            }}
-                          >
-                            <IconDelete />
-                          </button>
-                        </div>
+                        {editingId !== todo.id && (
+                          <div className={cls.todosItemButtons}>
+                            <button
+                              type="button"
+                              className={cls.todosItemEdit}
+                              onClick={() => {
+                                setEditingId(todo.id);
+                                setEditDraft(todo.text);
+                              }}
+                            >
+                              <IconEdit />
+                            </button>
+                            <button
+                              type="button"
+                              className={cls.todosItemDelete}
+                              onClick={() => {
+                                if (deletingId) return;
+                                setDeletingId(todo.id);
+                              }}
+                            >
+                              <IconDelete />
+                            </button>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>

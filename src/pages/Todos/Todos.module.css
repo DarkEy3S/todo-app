@@ -89,7 +89,7 @@
 .todosAdd {
     display: flex;
     gap: 4px;
-    flex-wrap: wrap;
+    align-items: stretch;
     margin-bottom: 12px;
     @media (max-width: 1440px) {
         margin-bottom: 32px;
@@ -100,23 +100,32 @@
 }
 .todosAddInput {
     flex: 0 1 300px;
+    min-width: 0;
+    resize: none;
+    field-sizing: content;
     background-color: var(--grey7);
     border: 1px solid var(--grey2);
     outline: none;
     padding: 8px;
     color: var(--black2);
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: inherit;
 
-    @media (max-width: 440px) {
-        flex: 1 1 100%;
-        max-width: 440px;
-    }
-}
-
-.todosAddButton {
     @media (max-width: 440px) {
         flex: 1 1 auto;
     }
+}
+
+.todosAddInput:focus {
+    border-color: var(--primary);
+}
+
+.todosAddButton {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 8px 16px;
+    flex: 0 0 auto;
 }
 
 .todosListTop {
@@ -235,13 +244,37 @@
     }
 }
 
-.todosItems {
-}
-
 .todosItem {
     display: flex;
     align-items: flex-start;
     padding: 16px;
+    position: relative;
+    overflow: hidden;
+}
+.todosItem::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--primary) 12%, var(--grey5));
+    transform: scaleX(0);
+    transform-origin: left center;
+    pointer-events: none;
+}
+.todosItemDeleting {
+    pointer-events: none;
+    animation: todoShrink 0.28s ease 0.28s forwards;
+}
+.todosItemDeleting::after {
+    transform: scaleX(1);
+    transition: transform 0.28s ease;
+}
+@keyframes todoShrink {
+    to {
+        opacity: 0;
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 }
 .todosItem + .todosItem {
     border-top: 1px solid var(--grey5);
@@ -257,32 +290,52 @@ display: flex;
 
 .todosItemContent {
     flex: 1 1 auto;
+    min-width: 0;
     margin: 0 4px;
-    
+}
+
+.todosItemEditRow {
+    display: flex;
+    gap: 4px;
+    align-items: stretch;
+    margin-bottom: 4px;
+}
+
+.todosItemEditInput {
+    flex: 1 1 auto;
+    min-width: 0;
+    resize: none;
+    field-sizing: content;
+    background-color: var(--white);
+    border: 1px solid var(--grey2);
+    outline: none;
+    padding: 8px;
+    color: var(--black2);
+    font-size: 14px;
+    line-height: 20px;
+    font-family: inherit;
+}
+
+.todosItemEditInput:focus {
+    border-color: var(--primary);
 }
 
 .btnEditSave {
-    font-size: 12px;
-    padding: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 8px 16px;
+    flex: 0 0 auto;
 }
 
-
 .todosItemContentText {
-    padding: 0 4px ;
+    padding: 0 4px;
     color: var(--black2);
     font-size: 14px;
     line-height: 20px;
     margin-bottom: 4px;
+    white-space: pre-wrap;
+    word-break: break-word;
     transition: color .2s ease-in-out, opacity 0.2s ease-in-out;
-    position: relative;
-
-    overflow: hidden;
-    display: flex;
-
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    width: 100%;
 }
 
 
@@ -326,6 +379,7 @@ display: flex;
     padding: 12px  33px 12px 12px;
     right: -50%;
     top: calc(100% + 4px);
+    z-index: 10;
 }
 
 .todosListSortMenu button {
