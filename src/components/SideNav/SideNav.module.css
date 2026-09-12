@@ -1,5 +1,5 @@
 .sideNav {
-    background: var(--gray4);
+    background: var(--grey4);
 }
 .sideWrapper {
     display: flex;
@@ -17,7 +17,7 @@
 }
 
 .sideNavTop {
-    border-bottom: 1px solid var(--gray5);
+    border-bottom: 1px solid var(--grey5);
 }
 
 .sideNavBottom {

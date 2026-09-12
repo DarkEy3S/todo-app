@@ -1,0 +1,62 @@
+.sort {
+    display: flex;
+    gap: 6px;
+    position: relative;
+}
+
+.arrow {
+    background: unset;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    width: 11px;
+    height: 11px;
+    transition: .2s transform ease-in-out;
+}
+
+.arrowDesc {
+    transform: scaleY(-1);
+}
+
+.text {
+    font-size: 12px;
+    background: unset;
+    border: none;
+    outline: none;
+    color: var(--black2);
+    cursor: pointer;
+}
+
+.menu {
+    position: absolute;
+    background-color: var(--grey7);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 16%);
+    padding: 12px 33px 12px 12px;
+    right: -50%;
+    top: calc(100% + 4px);
+    z-index: 10;
+}
+
+.menu button {
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    color: var(--black2);
+    position: relative;
+    padding-left: 16px;
+    line-height: 100%;
+}
+
+.menu button .check {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+}
+
+.menu button + button {
+    margin-top: 12px;
+}
