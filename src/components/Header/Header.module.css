@@ -1,5 +1,5 @@
 .header {
-    background-color: var(--gray6);
+    background-color: var(--grey6);
     width: 100%;
     position: sticky;
     top: 0;
@@ -98,7 +98,7 @@
     margin-right: auto;
     cursor: pointer;
     user-select: none;
-    font-family: var(--font4);
+    font-family: var(--font4), serif;
     @media (max-width: 834px) {
         span {
             display: none;

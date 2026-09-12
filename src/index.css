@@ -11,13 +11,13 @@
     --black1: #000;
     --black2: #201f1e;
     --black3: #323130;
-    --gray1: #605e5c;
-    --gray2: #8a8886;
-    --gray3: #a19f9d;
-    --gray4: #ddd;
-    --gray5: #edebe9;
-    --gray6: #f2f2f2;
-    --gray7: #fcfcfc;
+    --grey1: #605e5c;
+    --grey2: #8a8886;
+    --grey3: #a19f9d;
+    --grey4: #ddd;
+    --grey5: #edebe9;
+    --grey6: #f2f2f2;
+    --grey7: #fcfcfc;
     --grey20: #f3f2f1;
     --grey90: #a19f9d;
     --grey110: #8a8886;
@@ -40,7 +40,7 @@
     font-size: 24px;
     line-height: 165%;
     color-scheme: light dark;
-    color: var(--primary);
+    color: var(--secondary);
     background-color: var(--white);
 }
 
@@ -54,8 +54,12 @@
 
 
 a {
-    color: inherit;
+    color: var(--primary);
     text-decoration: inherit;
+    transition: color .2s ease-in-out;
+}
+a:hover {
+    color: var(--secondary);
 }
 
 body {
@@ -289,7 +293,7 @@ input[type="password"]::-ms-clear {
 .container {
     max-width: 860px;
     margin: 0 auto;
-    padding: 100px 0;
+    padding: 125px 0;
     @media (max-width: 1920px) {
         max-width: 816px;
         padding: 95px 0;
@@ -303,4 +307,38 @@ input[type="password"]::-ms-clear {
         max-width: calc(100% - (16 * 2) * 1px);
         padding: 24px 0;
     }
+}
+
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--black2);
+    border-radius: 0.2em;
+    background-color: #fff;
+    cursor: pointer;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin: 0;
+}
+input[type="checkbox"]:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
+input[type="checkbox"]:active {
+    filter: brightness(90%);
+}
+input[type="checkbox"]:hover:not(:disabled) {
+    border-color: var(--primary);
+}
+input[type="checkbox"]:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+input[type="checkbox"]:disabled {
+    filter: none;
+    opacity: 0.5;
+    cursor: not-allowed;
 }

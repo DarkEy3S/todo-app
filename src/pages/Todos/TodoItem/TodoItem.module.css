@@ -1,0 +1,123 @@
+.item {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--primary) 12%, var(--grey5));
+    transform: scaleX(0);
+    transform-origin: left center;
+    pointer-events: none;
+}
+
+.deleting {
+    pointer-events: none;
+    animation: todoShrink 0.28s ease 0.28s forwards;
+}
+
+.deleting::after {
+    transform: scaleX(1);
+    transition: transform 0.28s ease;
+}
+
+@keyframes todoShrink {
+    to {
+        opacity: 0;
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+.item + .item {
+    border-top: 1px solid var(--grey5);
+}
+
+.checkbox {
+    display: flex;
+    input {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.content {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0 4px;
+}
+
+.editRow {
+    display: flex;
+    gap: 4px;
+    align-items: stretch;
+    margin-bottom: 4px;
+}
+
+.editInput {
+    flex: 1 1 auto;
+    min-width: 0;
+    resize: none;
+    field-sizing: content;
+    background-color: var(--white);
+    border: 1px solid var(--grey2);
+    outline: none;
+    padding: 8px;
+    color: var(--black2);
+    font-size: 14px;
+    line-height: 20px;
+    font-family: inherit;
+}
+
+.editInput:focus {
+    border-color: var(--primary);
+}
+
+.save {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 8px 16px;
+    flex: 0 0 auto;
+}
+
+.text {
+    padding: 0 4px;
+    color: var(--black2);
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 4px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    transition: color .2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.completed {
+    color: var(--grey2);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.date {
+    color: var(--grey1);
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 17px;
+    align-self: center;
+
+    button {
+        cursor: pointer;
+        background: unset;
+        outline: unset;
+        border: unset;
+    }
+}

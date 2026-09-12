@@ -28,7 +28,7 @@ export const SideNav = forwardRef<HTMLDivElement, IProp>(({ className }, ref) =>
               </Link>
             </li>
             <li>
-              <Link to={"/"}>
+              <Link to={"/todos"}>
                 <TodosIcon /> Todos
               </Link>
             </li>
