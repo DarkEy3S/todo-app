@@ -30,7 +30,7 @@ export const SignUp = () => {
                 email: form.emailValue,
                 password: form.passwordValue,
                 options: {
-                  emailRedirectTo: `${window.location.origin}/todos`,
+                  emailRedirectTo: `${window.location.origin}${import.meta.env.BASE_URL}todos`,
                 }
               }).then(({ error }) => {
                 if (error) form.setTextError(error.message);

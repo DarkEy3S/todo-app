@@ -45,7 +45,7 @@ export const ForgotPassword = () => {
                 </label>
                 <button className={`${btn.btn} ${cls.button}`} type="submit" onClick={() => {
                   supabase.auth.resetPasswordForEmail(email, {
-                    redirectTo: `${window.location.origin}/reset-password`,
+                    redirectTo: `${window.location.origin}${import.meta.env.BASE_URL}reset-password`,
                   }).then(({ error }) => {
                     if (error) setError(error.message);
                     else navigate("/forgot-password?sent");

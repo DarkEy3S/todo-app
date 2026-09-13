@@ -23,7 +23,7 @@ export const ConfirmEmail = () => {
     const { error } = await supabase.auth.resend({
       type: "signup",
       email,
-      options: { emailRedirectTo: `${window.location.origin}/todos` },
+      options: { emailRedirectTo: `${window.location.origin}${import.meta.env.BASE_URL}todos` },
     });
     if (!error) setLeft(WAIT);
   };
