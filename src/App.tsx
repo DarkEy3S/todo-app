@@ -5,6 +5,7 @@ import { SignUp } from "./pages/SignUp";
 import { SignIn } from "./pages/SignIn";
 import { Privacy } from "./pages/Privacy";
 import { Todos } from "./pages/Todos";
+import { Error } from "./pages/Error";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/todos" element={<Todos />} />
-          <Route path="*" element={<div>404!</div>} />
+          <Route path="*" element={<Error />} />
         </Route>
       </Routes>
     </BrowserRouter>
