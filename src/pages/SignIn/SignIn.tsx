@@ -1,12 +1,18 @@
 import cls from "./SignIn.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import btn from "../../assets/buttons.module.css";
 import { AuthErrorBanner } from "../../components/AuthErrorBanner";
 import { AuthFields } from "../../components/AuthFields";
 import { useAuthForm } from "../../hooks/useAuthForm";
+import { supabase } from "../../lib/supabase";
+
 
 export const SignIn = () => {
   const form = useAuthForm();
+
+
+  const navigate = useNavigate();
+
   return (
     <section className={cls.signIn}>
       <div className={cls.signInContent}>
@@ -18,9 +24,13 @@ export const SignIn = () => {
             action=""
             onSubmit={(event) => {
               event.preventDefault();
-              if (form.emailValue === "test@test.test") {
-                form.setTextError("User already exists");
-              } else form.setTextError(null);
+              supabase.auth.signInWithPassword({
+                email: form.emailValue,
+                password: form.passwordValue,
+              }).then(({ error }) => {
+                if (error) form.setTextError(error.message);
+                else navigate("/todos");
+              });
             }}
           >
             <AuthFields
@@ -43,7 +53,7 @@ export const SignIn = () => {
             </button>
           </form>
           <div className={cls.signInPageForgot}>
-            <Link to={"#"}>Forgot password?</Link>
+            <Link to={"/forgot-password"}>Forgot password?</Link>
           </div>
           <div className={cls.signInBlockSignIn}>
             <span>Already on MaToDo?</span> <Link to={"/signup"}>Sign up</Link>

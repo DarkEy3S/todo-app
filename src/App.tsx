@@ -8,6 +8,8 @@ import { Privacy } from "./pages/Privacy";
 import { Todos } from "./pages/Todos";
 import { ConfirmEmail } from "./pages/ConfirmEmail";
 import { EditProfile } from "./pages/EditProfile/EditProfile";
+import { ForgotPassword } from "./pages/ForgotPassword";
+import { ResetPassword } from "./pages/ResetPassword";
 import { Error } from "./pages/Error";
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/confirm-email" element={<ConfirmEmail />} />
             <Route path="/profile" element={<EditProfile />} />
