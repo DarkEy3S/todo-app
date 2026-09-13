@@ -6,6 +6,7 @@ import { forwardRef } from "react";
 import { Modal } from "../Modal";
 import { SignOut } from "../SignOut";
 import { useDisclosure } from "../../hooks/useDisclosure";
+import { supabase } from "../../lib/supabase";
 
 interface IProp {
   className: string;
@@ -47,8 +48,7 @@ export const SideNav = forwardRef<HTMLDivElement, IProp>(({ className }, ref) =>
           <SignOut
             onClose={close}
             handleSignOut={() => {
-              console.log("Sing out success");
-              close();
+              void supabase.auth.signOut().then(close);
             }}
           />
         }

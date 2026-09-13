@@ -1,0 +1,104 @@
+.page {
+    height: 100%;
+    min-height: 248px;
+    padding: 24px 16px;
+    background-color: var(--secondary);
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    background-color: var(--grey7);
+    width: 608px;
+    max-width: 100%;
+    border-radius: 4px;
+    padding: 40px 56px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    @media (max-width: 834px) {
+        padding: 32px 14px;
+    }
+}
+
+.title {
+    color: var(--secondary);
+    font-size: 28px;
+    line-height: 148%;
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--s2);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    object-fit: cover;
+}
+
+.email {
+    color: var(--s3);
+    font-size: 13px;
+}
+
+.field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left;
+
+    span {
+        color: var(--black2);
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    input,
+    .file {
+        width: 100%;
+        background-color: var(--grey7);
+        color: var(--black2);
+        padding: 8px;
+        border-radius: 2px;
+        border: 1px solid var(--black2);
+        font: inherit;
+        font-size: 14px;
+        text-align: left;
+    }
+
+    .file {
+        cursor: pointer;
+        color: var(--grey1);
+    }
+}
+
+.gender {
+    width: 100%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    font-size: 14px;
+    color: var(--black2);
+
+    legend {
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 400;
+    }
+}

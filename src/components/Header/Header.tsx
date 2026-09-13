@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import cls from "./Header.module.css";
 import { SignInIcon, SignUpIcon } from "../icons.tsx";
 import type { RefObject } from "react";
+import { useAuthReady, useSession } from "../../hooks/useAuth";
 
 interface HeaderProps {
   burgerFunction?: () => void;
@@ -11,6 +12,8 @@ interface HeaderProps {
 }
 
 export const Header = ({ burgerFunction, burgerActive, burgerBtnRef }: HeaderProps) => {
+  const session = useSession();
+  const ready = useAuthReady();
   const burgerHandler = (): void => {
     if (burgerFunction) {
       burgerFunction();
@@ -20,11 +23,13 @@ export const Header = ({ burgerFunction, burgerActive, burgerBtnRef }: HeaderPro
   return (
     <header className={cls.header}>
       <div className={cls.headerTop}>
-        <div ref={burgerBtnRef} className={`${cls.headerBurger} ${burgerActive ? cls.active : ""}`} onClick={burgerHandler}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+        {session && (
+          <div ref={burgerBtnRef} className={`${cls.headerBurger} ${burgerActive ? cls.active : ""}`} onClick={burgerHandler}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        )}
         <Link to={"/"} className={cls.headerLogo}>
           <img src={logoSvg} alt="logo" />
           <span>MaToDo</span>
@@ -32,18 +37,20 @@ export const Header = ({ burgerFunction, burgerActive, burgerBtnRef }: HeaderPro
         <Link to={"/privacy"} className={cls.headerPrivacy}>
           Privacy
         </Link>
-        <div className={cls.headerAccounts}>
-          <Link to={"/signup"}>
-            <SignUpIcon />
-            <span>Sign up</span>
-          </Link>
-          <p>
-            <Link to={"/signin"}>
-              <SignInIcon />
-              <span>Sign in</span>
+        {ready && !session && (
+          <div className={cls.headerAccounts}>
+            <Link to={"/signup"}>
+              <SignUpIcon />
+              <span>Sign up</span>
             </Link>
-          </p>
-        </div>
+            <p>
+              <Link to={"/signin"}>
+                <SignInIcon />
+                <span>Sign in</span>
+              </Link>
+            </p>
+          </div>
+        )}
       </div>
       <div className={cls.headerBottom}>
         <p className={cls.headerText}>Our Site may use “cookies” to enhance User experience.</p>
