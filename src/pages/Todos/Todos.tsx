@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect  } from "react";
+import { Navigate } from "react-router-dom";
 import { IconNoProjects, IconSearch } from "../../components/icons";
 import btn from "../../assets/buttons.module.css";
 import { TodoItem } from "./TodoItem";
 import { TodoSort } from "./TodoSort";
 import type { Filter, ITodo, SortBy, SortDir } from "./types";
 import cls from "./Todos.module.css";
+import { supabase } from "../../lib/supabase";
+import { useAuthReady, useSession } from "../../hooks/useAuth";
+import { AuthErrorBanner } from "../../components/AuthErrorBanner";
 
 export const Todos = () => {
-  const [todos, setTodos] = useState<ITodo[]>([
-    { id: crypto.randomUUID(), text: "Project name", completed: false, createdAt: new Date("2022-01-03") },
-    { id: crypto.randomUUID(), text: "Project name", completed: false, createdAt: new Date("2022-01-03") },
-    { id: crypto.randomUUID(), text: "Project name", completed: false, createdAt: new Date("2022-01-03") },
-  ]);
+  const [todos, setTodos] = useState<ITodo[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState<Filter>("all");
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -20,6 +20,32 @@ export const Todos = () => {
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [todoCreateValue, setTodoCreateValue] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+
+  const session = useSession();
+  const ready = useAuthReady();
+
+  useEffect(() => {
+    if (!session) {
+      setTodos([]);
+      setError(null);
+      return;
+    }
+    supabase.from("todos").select("*").then(({ data, error }) => {
+      if (error) {
+        setError(error.message);
+        return;
+      }
+      setError(null);
+      setTodos((data ?? []).map((row) => ({
+        id: row.id,
+        text: row.text,
+        completed: row.completed,
+        createdAt: new Date(row.created_at),
+      })));
+    });
+  }, [session]);
 
   const visibleTodos = todos
     .filter((todo) => {
@@ -44,15 +70,33 @@ export const Todos = () => {
   const saveEdit = () => {
     if (!editingId) return;
     const text = editDraft.trim();
-    if (text) setTodos((prev) => prev.map((item) => (item.id === editingId ? { ...item, text } : item)));
-    setEditingId(null);
+    if (!text) {
+      setEditingId(null);
+      return;
+    }
+    supabase.from("todos").update({ text }).eq("id", editingId).select().single().then(({ data, error }) => {
+      if (error) {
+        setError(error.message);
+        return;
+      }
+      setError(null);
+      setTodos((prev) => prev.map((item) => (item.id === editingId ? { ...item, text: data.text } : item)));
+      setEditingId(null);
+    });
   };
 
   const addTodo = () => {
     const text = todoCreateValue.trim();
     if (!text) return;
-    setTodos((prev) => [...prev, { id: crypto.randomUUID(), text, completed: false, createdAt: new Date() }]);
-    setTodoCreateValue("");
+    supabase.from("todos").insert({ text }).select().single().then(({ data, error }) => {
+      if (error) {
+        setError(error.message);
+        return;
+      }
+      setError(null);
+      setTodos((prev) => [...prev, { id: data.id, text: data.text, completed: data.completed, createdAt: new Date(data.created_at) }]);
+      setTodoCreateValue("");
+    });
   };
 
   const renderSort = () => (
@@ -64,9 +108,13 @@ export const Todos = () => {
     />
   );
 
+  if (!ready) return null;
+  if (!session) return <Navigate to="/signin" replace />;
+
   return (
     <section className={cls.todos}>
       <div className="container">
+        {error && <AuthErrorBanner message={error} onClose={() => setError(null)}  />}
         <div className={cls.todosContent}>
           <div className={cls.todosTop}>
             <div className={cls.todosSearch}>
@@ -146,11 +194,26 @@ export const Todos = () => {
                         }}
                         onSave={saveEdit}
                         onCancel={() => setEditingId(null)}
-                        onToggle={(checked) =>
-                          setTodos((prev) => prev.map((item) => (item.id === todo.id ? { ...item, completed: checked } : item)))
-                        }
+                        onToggle={(checked) => {
+                          supabase.from("todos").update({ completed: checked }).eq("id", todo.id).select().single().then(({ data, error }) => {
+                            if (error) {
+                              setError(error.message);
+                              return;
+                            }
+                            setError(null);
+                            setTodos((prev) => prev.map((item) => (item.id === todo.id ? { ...item, completed: data.completed } : item)));
+                          });
+                        }}
                         onDelete={() => {
-                          if (!deletingId) setDeletingId(todo.id);
+                          if (deletingId) return;
+                          supabase.from("todos").delete().eq("id", todo.id).then(({ error }) => {
+                            if (error) {
+                              setError(error.message);
+                              return;
+                            }
+                            setError(null);
+                            setDeletingId(todo.id);
+                          });
                         }}
                         onDeleteDone={() => {
                           setTodos((prev) => prev.filter((item) => item.id !== todo.id));
