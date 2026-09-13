@@ -1,4 +1,9 @@
 services:
   react-app:
+    build:
+      target: prod
+      args:
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY}
     ports:
-      - "${PORT:-8080}:80"
+      - "0.0.0.0:${PORT:-8081}:80"

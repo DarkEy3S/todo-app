@@ -49,7 +49,7 @@ npm run docker:prod
 ```
 
 * Nginx раздаёт собранное SPA
-* Доступно по `http://localhost` (порт можно изменить в `.env`)
+* Доступно по `http://localhost:8081` (порт — `PORT` в `.env.prod`)
 * React Router работает корректно (без перезагрузки страницы при переходах)
 
 ---
@@ -74,8 +74,10 @@ NODE_ENV=development
 
 # .env.prod
 BUILD_TARGET=prod
-PORT=80
+PORT=8081
 NODE_ENV=production
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
 ```
 
 > ⚡ Совет: добавьте `.env.example` с примером значений для Git, а реальные `.env` не пушьте.
