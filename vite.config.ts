@@ -11,4 +11,5 @@ export default defineConfig({
       usePolling: true,
     },
   },
+  base: process.env.GITHUB_PAGES === "true" ? "/todo-app/" : "/",
 });
