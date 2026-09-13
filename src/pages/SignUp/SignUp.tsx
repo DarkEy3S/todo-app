@@ -1,13 +1,15 @@
 import cls from "./SignUp.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import btn from "../../assets/buttons.module.css";
 import { AuthErrorBanner } from "../../components/AuthErrorBanner";
 import { AuthFields } from "../../components/AuthFields";
 import { useAuthForm } from "../../hooks/useAuthForm";
 import { useId, useState } from "react";
+import { supabase } from "../../lib/supabase";
 
 export const SignUp = () => {
   const form = useAuthForm();
+  const navigate = useNavigate();
   const signUpPrivacyId = useId();
   const [privacyCheckbox, setPrivacyCheckbox] = useState(false);
   const isSubmitDisabled = form.isFieldsDisabled || !privacyCheckbox;
@@ -24,9 +26,16 @@ export const SignUp = () => {
             action=""
             onSubmit={(event) => {
               event.preventDefault();
-              if (form.emailValue === "test@test.test") {
-                form.setTextError("User already exists");
-              } else form.setTextError(null);
+              supabase.auth.signUp({
+                email: form.emailValue,
+                password: form.passwordValue,
+                options: {
+                  emailRedirectTo: `${window.location.origin}/todos`,
+                }
+              }).then(({ error }) => {
+                if (error) form.setTextError(error.message);
+                else navigate("/confirm-email", { state: { email: form.emailValue } });
+              });
             }}
           >
             <AuthFields

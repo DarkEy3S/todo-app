@@ -5,6 +5,7 @@ import { SignUp } from "./pages/SignUp";
 import { SignIn } from "./pages/SignIn";
 import { Privacy } from "./pages/Privacy";
 import { Todos } from "./pages/Todos";
+import { ConfirmEmail } from "./pages/ConfirmEmail";
 import { Error } from "./pages/Error";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/confirm-email" element={<ConfirmEmail />} />
           <Route path="/todos" element={<Todos />} />
           <Route path="*" element={<Error />} />
         </Route>
