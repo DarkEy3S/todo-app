@@ -1,11 +1,12 @@
 import cls from "./SideNav.module.css";
 import { HomeIcon, SignOutIcon, TodosIcon } from "../icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Profile } from "../Profile";
 import { forwardRef } from "react";
 import { Modal } from "../Modal";
 import { SignOut } from "../SignOut";
 import { useDisclosure } from "../../hooks/useDisclosure";
+import { supabase } from "../../lib/supabase";
 
 interface IProp {
   className: string;
@@ -13,7 +14,7 @@ interface IProp {
 
 export const SideNav = forwardRef<HTMLDivElement, IProp>(({ className }, ref) => {
   const { isOpen, open, close } = useDisclosure();
-
+  const navigate = useNavigate();
   return (
     <aside ref={ref} className={`${cls.sideNav} ${className}`}>
       <div className={cls.sideWrapper}>
@@ -47,8 +48,10 @@ export const SideNav = forwardRef<HTMLDivElement, IProp>(({ className }, ref) =>
           <SignOut
             onClose={close}
             handleSignOut={() => {
-              console.log("Sing out success");
-              close();
+              void supabase.auth.signOut().then(() => {
+                close();
+                navigate("/");
+              });
             }}
           />
         }

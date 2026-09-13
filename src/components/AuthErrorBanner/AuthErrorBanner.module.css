@@ -4,7 +4,7 @@
     width: 100%;
     background-color: #F7E1E3;
     padding: 12px 8px;
-    height: 32px;
+    min-height: 32px;
     align-items: center;
 }
 
@@ -21,6 +21,7 @@
     flex: 1 1 auto;
     padding: 0 8px;
     font-size: 12px;
+    line-height: 125%;
 }
 
 .iconClear button {

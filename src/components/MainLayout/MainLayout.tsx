@@ -5,8 +5,10 @@ import { Header } from "../Header";
 import { Footer } from "../Footer";
 import { SideNav } from "../SideNav";
 import { useScrollLock } from "../../hooks/useScrollLock";
+import { useSession } from "../../hooks/useAuth";
 
 export const MainLayout = () => {
+  const session = useSession();
   const [burgerActive, setBurgerActive] = useState(false);
   const sideNavRef = useRef<HTMLDivElement | null>(null);
   const burgerBtnRef = useRef<HTMLDivElement | null>(null);
@@ -42,11 +44,15 @@ export const MainLayout = () => {
     setBurgerActive((prev) => !prev);
   };
 
+  useEffect(() => {
+    if (!session) setBurgerActive(false);
+  }, [session]);
+
   return (
     <div className={cls.mainLayout}>
-      <Header burgerFunction={burgerFunction} burgerActive={burgerActive} burgerBtnRef={burgerBtnRef} />{" "}
+      <Header burgerFunction={session ? burgerFunction : undefined} burgerActive={burgerActive} burgerBtnRef={burgerBtnRef} />{" "}
       <div className={cls.mainRow}>
-        <SideNav ref={sideNavRef} className={burgerActive ? cls.active : ""} />
+        {session && <SideNav ref={sideNavRef} className={burgerActive ? cls.active : ""} />}
         <div className={cls.mainWrapper}>
           <main className={cls.main}>
             <Suspense>
